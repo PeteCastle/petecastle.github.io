@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
   /* Provide basic, default focus styles.*/
   :focus {
-    outline: 2px dashed var(--orange);
+    outline: 2px dashed var(--palette-1);
     outline-offset: 3px;
   }
 
@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
     focus.
   */
   :focus-visible {
-    outline: 2px dashed var(--orange);
+    outline: 2px dashed var(--palette-1);
     outline-offset: 3px;
   }
 
@@ -75,8 +75,8 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--grey);
-    color: var(--slate);
+    background-color: var(--palette-1);
+    color: var(--palette-4);
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
     line-height: 1.3;
@@ -146,7 +146,7 @@ const GlobalStyle = createGlobalStyle`
 
   section {
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 10px 0;
     max-width: 1000px;
 
     @media (max-width: 768px) {
@@ -166,18 +166,22 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     margin: 0 0 10px 0;
     font-weight: 600;
-    color: var(--lightest-slate);
+    color: var(--palette-4);
     line-height: 1.1;
+    
+    
   }
 
   .big-heading {
     margin: 0;
-    font-size: clamp(40px, 8vw, 80px);
+    font-size: clamp(40px, 8vw, 50px);
+    text-align: center;
   }
 
   .medium-heading {
     margin: 0;
-    font-size: clamp(40px, 8vw, 60px);
+    font-size: clamp(40px, 8vw, 40px);
+    text-align: center;
   }
 
   .numbered-heading {
@@ -195,7 +199,7 @@ const GlobalStyle = createGlobalStyle`
       counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;
-      color: var(--orange);
+      color: var(--palette-1);
       font-family: var(--font-mono);
       font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
       font-weight: 400;
@@ -262,7 +266,7 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover,
     &:focus {
-      color: var(--orange);
+      color: var(--palette-3);
     }
 
     &.inline-link {
@@ -326,14 +330,14 @@ const GlobalStyle = createGlobalStyle`
           content: '▹';
           position: absolute;
           left: 0;
-          color: var(--orange);
+          color: var(--palette-1);
         }
       }
     }
   }
 
   blockquote {
-    border-left-color: var(--orange);
+    border-left-color: var(--palette-1);
     border-left-style: solid;
     border-left-width: 1px;
     margin-left: 0px;
@@ -373,7 +377,7 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover,
     &:focus {
-      background-color: var(--orange);
+      background-color: var(--palette-1);
       color: var(--grey);
       top: 0;
       left: 0;
@@ -387,18 +391,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #logo {
-    color: var(--orange);
+    color: var(--palette-1);
   }
 
   .overline {
-    color: var(--orange);
+    color: var(--palette-1);
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 400;
   }
 
   .subtitle {
-    color: var(--orange);
+    color: var(--palette-1);
     margin: 0 0 20px 0;
     font-size: var(--fz-md);
     font-family: var(--font-mono);
@@ -421,7 +425,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     align-items: center;
     margin-bottom: 50px;
-    color: var(--orange);
+    color: var(--palette-1);
 
     .arrow {
       display: block;

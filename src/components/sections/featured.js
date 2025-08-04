@@ -101,6 +101,7 @@ const StyledProject = styled.li`
     }
 
     @media (max-width: 768px) {
+      
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -117,14 +118,14 @@ const StyledProject = styled.li`
 
   .project-overline {
     margin: 10px 0;
-    color: var(--orange);
+    color: var(--palette-1);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
     font-weight: 400;
 
     .project-tag {
-      background-color: var(--orange);
-      color: var(--dark-grey);
+      background-color: var(--palette-2);
+      color: var(--palette-4);
       padding-left: 2px;
       padding-right: 2px;
       text-transform: uppercase;
@@ -134,7 +135,7 @@ const StyledProject = styled.li`
   }
 
   .project-title {
-    color: var(--lightest-slate);
+    color: var(--palette-4);
     font-size: clamp(24px, 5vw, 28px);
 
     
@@ -144,7 +145,7 @@ const StyledProject = styled.li`
     }
 
     @media (max-width: 768px) {
-      color: var(--white);
+      color: var(--palette-4);
 
       a {
         position: static;
@@ -169,14 +170,15 @@ const StyledProject = styled.li`
     z-index: 2;
     padding: 25px;
     border-radius: var(--border-radius);
-    background-color: var(--light-grey);
-    color: var(--light-slate);
+    background-color: var(--palette-4);
+    color: var(--palette-1);
     font-size: var(--fz-lg);
 
     @media (max-width: 768px) {
       padding: 20px 0;
       background-color: transparent;
       box-shadow: none;
+      color: var(--palette-4);
 
       &:hover {
         box-shadow: none;
@@ -188,7 +190,7 @@ const StyledProject = styled.li`
     }
 
     strong {
-      color: var(--white);
+      color: var(--palette-4);
       font-weight: normal;
     }
   }
@@ -204,7 +206,7 @@ const StyledProject = styled.li`
 
     li {
       margin: 0 20px 5px 0;
-      color: var(--light-slate);
+      color: var(--palette-4);
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
@@ -215,7 +217,7 @@ const StyledProject = styled.li`
 
       li {
         margin: 0 10px 5px 0;
-        color: var(--lightest-slate);
+        color: var(--palette-4);
       }
     }
   }
@@ -226,7 +228,7 @@ const StyledProject = styled.li`
     position: relative;
     margin-top: 10px;
     margin-left: -10px;
-    color: var(--lightest-slate);
+    color: var(--palette-4);
 
     a {
       ${({ theme }) => theme.mixins.flexCenter};
@@ -268,7 +270,7 @@ const StyledProject = styled.li`
     a {
       width: 100%;
       height: 100%;
-      background-color: var(--orange);
+      background-color: var(--palette-1);
       border-radius: var(--border-radius);
       vertical-align: middle;
 
@@ -295,7 +297,7 @@ const StyledProject = styled.li`
         bottom: 0;
         z-index: 3;
         transition: var(--transition);
-        background-color: var(--dark-grey);
+        background-color: var(--palette-4);
         mix-blend-mode: screen;
       }
     }
@@ -361,7 +363,7 @@ const Featured = () => {
   return (
     <section id="projects">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
+        Featured Projects
       </h2>
 
       <StyledProjectsGrid>
@@ -375,7 +377,7 @@ const Featured = () => {
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
                   <div>
-                    <p className="project-overline">{ tag && <span className='project-tag'>{tag}</span>} Featured Project</p>
+                    <p className="project-overline">{ tag && <span className='project-tag'>{tag}</span>}</p>
 
                     <h3 className="project-title">
                       <a href={external} target='_blank' rel="noreferrer">{title}</a>

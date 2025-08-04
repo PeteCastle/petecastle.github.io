@@ -1,10 +1,10 @@
 ---
 date: '2'
 title: 'Integrated Mosquito Detection and Fumigation System Utilizing Faster RCNN'
-cover: './scale_website.jpg'
-github: 'https://github.com/PeteCastle/MosquitoDetectionFumigation'
-external: 'https://github.com/PeteCastle/MosquitoDetectionFumigation'
-tag: 'Upcoming'
+cover: './scale_software_arch_ml_focused.png'
+github: 'https://github.com/PeteCastle/SCALE-Model'
+external: 'https://github.com/PeteCastle/SCALE-Model'
+tag: 'Image Recognition'
 tech:
   - TensorFlow
   - Detectron2

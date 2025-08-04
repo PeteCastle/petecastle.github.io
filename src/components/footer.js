@@ -42,7 +42,7 @@ s
 `;
 
 const StyledCredit = styled.div`
-  color: var(--light-slate);
+  color: var(--palette-4);
   font-family: var(--font-mono);
   font-size: 9px;
   line-height: 1;
@@ -72,7 +72,7 @@ const StyledCredit = styled.div`
   }
 
   svg {
-    color: var(--orange);
+    color: var(--palette-1);
     width: 200px;
   }
 `;
@@ -116,12 +116,9 @@ const Footer = () => {
 
       <StyledCredit tabindex="-1">
         <IconLogo />
-        <div className='author'><b>Francis Mark Cayco</b></div>
+        <div className='author'><b>© 2025 Francis Mark Cayco</b></div>
         <a href="https://github.com/bchiang7/v4">
-          
-          <div><i>Template designed by Brittany Chiang</i></div>
-
-         
+          <div><i>Template inspired from Brittany Chiang</i></div>
         </a>
       </StyledCredit>
     </StyledFooter>

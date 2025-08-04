@@ -2,6 +2,11 @@ import { css } from 'styled-components';
 
 const variables = css`
   :root {
+    --palette-1: #F4E7E1;
+    --palette-2: #FF9B45;
+    --palette-3: #D5451B;
+    --palette-4: #521C0D;
+
     --dark-navy: #020c1b;
     --navy: #0a192f;
     --light-navy: #112240;
@@ -11,7 +16,9 @@ const variables = css`
     
     
     
-    --white: #e6f1ff;
+    --white: #F2F2F2;
+
+
     --green: #64ffda;
     --green-tint: rgba(100, 255, 218, 0.1);
     --pink: #f57dff;

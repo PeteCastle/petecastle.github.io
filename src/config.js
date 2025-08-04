@@ -78,6 +78,14 @@ module.exports = {
   ],
   socialMedia: [
     {
+      name: 'Email',
+      url: 'mailto:francis_mark_cayco@yahoo.com'
+    },
+    {
+      name: 'Phone',
+      url: 'tel:+639990368778',
+    },
+    {
       name: 'GitHub',
       url: 'https://github.com/PeteCastle/',
     },
@@ -86,20 +94,13 @@ module.exports = {
       url: 'https://www.linkedin.com/in/francis-mark-cayco-33511a190/',
     },
     {
-      name: 'YouTube',
-      url: 'https://www.youtube.com/channel/UCqktL_sOtbr6cNX2me4us5A',
-    },
-    {
       name: 'Instagram',
       url: 'https://www.instagram.com/francismarkk/?hl=en',
     },
-    // {
-    //   name: 'Twitter',
-    //   url: 'https://twitter.com/petecastle_pro',
-    // },
-    
-    
- 
+    {
+      name: 'CV',
+      url: 'https://petecastle.github.io/Francis Mark Cayco - Resume V2.1.1.pdf',
+    }
   ],
 
   navLinks: [

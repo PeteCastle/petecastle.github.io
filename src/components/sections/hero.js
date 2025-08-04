@@ -3,45 +3,104 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
 import { usePrefersReducedMotion } from '@hooks';
+import { socialMedia } from '@config';
+import Icon from '@icons/icon';
 
 const PicturedHeroSection = styled.section`
-    ${({ theme }) => theme.mixins.flexCenter};
- 
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  padding: 200px 0px 0 0px; /* top, right, bottom, left */
 
-    min-height: 100vh;
-    height: 100vh;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0 20px;
+  }
 
-    img {
-        width: 40%;
-        height: 50%;
-        object-fit: contain ;
-        border-radius: var(--border-radius);
-        transition: var(--transition);
-        pointer-events: none;
-    
+  img {
+    width: 200px;      /* Fixed width for better control */
+    height: auto;      /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    pointer-events: none;
+  }
+
+`;
+
+const StyledRightSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+  text-align: left;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  max-width: 600px;
+  width: 100%;
+
+  p {
+    max-width: 100%;
+    width: 100%;
+  }
+`;
+
+
+const StyledSocialList = styled.ul`
+  display: flex;
+  flex-wrap: wrap; /* allow items to wrap to multiple rows */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 10px; /* optional: use instead of margin on li for better wrap handling */
+
+  li {
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; /* constant width */
+      height: 40px; /* constant height */
+      padding: 0;
+
+      &:hover,
+      &:focus {
+        transform: translateY(-3px);
+      }
+
+      svg {
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+      }
     }
+  }
+`;
 
-    @media (max-width: 620px) {
-        img {
-            width: 50%;
-            height: 20%;
-        }
-        // display:block;
-        flex-direction: column-reverse;
-
-        
-    }   
-`
 
 const StyledHeroSection = styled.section`
-  ${({ theme }) => theme.mixins.flexCenter};
+  // position: sticky;
+  // top: 100px; /* Adjust based on your header/nav height */
+  align-self: flex-start; /* allow it to size properly inside flex */
+  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
   padding: 0;
+  height: fit-content;
 
-  @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
+  @media (max-width: 768px) {
+    position: static;
+  }
+
+  @media (max-height: 700px) and (min-width: 00px), (max-width: 450px) {
     height: auto;
     padding-top: var(--nav-height);
   }
@@ -58,15 +117,25 @@ const StyledHeroSection = styled.section`
     }
   }
 
+  h2 {
+    font-size: clamp(40px, 8vw, 45px);
+    margin: 30px 0 10px 0;
+    font-weight: 600;
+    color: var(--palette-4);
+    line-height: 1.1;
+  }
+
   h3 {
-    margin-top: 5px;
-    color: var(--slate);
+    margin-top: 0px;
+    font-weight: 500;
+    color: var(--palette-3);
     line-height: 0.9;
+    font-size: clamp(20px, 4vw, 20px);
   }
 
   p {
     margin: 20px 0 0;
-    max-width: 540px;
+    max-width: 500px;
   }
 
   .email-link {
@@ -75,91 +144,180 @@ const StyledHeroSection = styled.section`
   }
 `;
 
+
+const StyledInterestsSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-top: 40px;
+  width: 100%;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .interests {
+    flex: 5; /* narrower */
+  }
+
+  .education {
+    flex: 7 ; /* wider */
+  }
+
+  .interests ul {
+    padding-left: 20px;
+  }
+
+  .education-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 20px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin-top: 4px;
+    }
+
+    .text {
+      h4 {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        color: var(--palette-4);
+        font-size: 14px;
+      }
+    }
+  }
+`;
+
+
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
-
+  
   useEffect(() => {
     if (prefersReducedMotion) {
+      // setIsMounted(true)
       return;
     }
 
-    const timeout = setTimeout(() => setIsMounted(true), navDelay);
+    const timeout = setTimeout(() => setIsMounted(true), 10);
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi there! I'm</h1>;
-  const two = <h2 className="big-heading">Francis Mark.</h2>;
-  const three = <h3 className="big-heading">I want to engineer data.</h3>;
-  const four = (
+  const photo = <img
+    style={{ transitionDelay: `100ms` }}
+    src="petecastle_frontpage.png"
+    alt="PeteCastle_front"
+  />;
+  const name = <h2>Francis Mark Cayco</h2>;
+  const branding = <h3>Full Stack Data Scientist and ETL Developer</h3>;
+  
+  const socials = <StyledSocialList>
+    {socialMedia &&
+      socialMedia.map(({ url, name }, i) => (
+        <li key={i}>
+          <a href={url} aria-label={name} target="_blank" rel="noreferrer">
+            <Icon name={name} />
+          </a>
+        </li>
+      ))}
+  </StyledSocialList>
+
+
+
+  const about_header = <h2 style={{ transitionDelay: `200ms` }}>Biography</h2>;
+
+  const about = (
     <>
       <p>
-       Currently a senior computer engineering student at 
-        <a href="https://www.plm.edu.ph/" target="_blank" rel="noreferrer">Pamantasan ng Lungsod ng Maynila</a>
-        {' '}driven by strong interest in the fields of data science and engineering. 
-        I hold a pivotal role as a Data Science Lead volunteer at {' '}
-        <a href="https://gdsc.community.dev/pamantasan-ng-lungsod-ng-maynila/" class="inline-link">GDSC-PLM</a>
-        , where I actively contribute to leveraging data-driven insights for impactful solutions.
-        
-       
+        <b>Full-stack Data Scientist</b> with a strong foundation in machine learning, backend development, and data engineering. Skilled in building robust, explainable ML models and deploying scalable systems across cloud platforms. Experienced in MLOps, API development, and orchestrating data pipelines that power real-time insights and strategic decisions.
+      </p>
+      <p>
+        In 2022, I found myself asking, “How can businesses make meaningful decisions from the vast amounts of customer data?” That simple question led me to a TED Talk—and ultimately introduced me to the world of data science. Since then, I’ve been deeply engaged in exploring how data can drive insights, solve real-world problems, and shape smarter decisions.
       </p>
     </>
   );
-  const five = (
-    <a
-        className="email-link"
-        href="Francis Mark Cayco - Resume V1.6.pdf"
-        target="_blank"
-        rel="noreferrer">
-        Download my resume
-    </a>
-  
+
+  const interests_educ = (
+    <StyledInterestsSection>
+      <div className="interests">
+        <h3>Interests</h3>
+        <ul>
+          <li>Data Science, AI, and Machine Learning</li>
+          <li>Predictive Analytics</li>
+          <li>Data Engineering</li>
+          <li>Machine Learning Operations</li>
+          <li>Explainable AI</li>
+          <li>Network Science</li>
+        </ul>
+      </div>
+
+      <div className="education">
+        <h3>Education</h3>
+
+        <div className="education-entry">
+          <img src="asian-institute-of-management.webp" alt="AIM Logo" />
+          <div className="text">
+            <h4>MSc in Data Science, 2025</h4>
+            <p>Asian Institute of Management</p>
+          </div>
+        </div>
+
+        <div className="education-entry">
+          <img src="PLM_Seal_2013.png" alt="PLM Logo" />
+          <div className="text">
+            <h4>BSc in Computer Engineering, 2024</h4>
+            <p><i>Summa Cum Laude</i></p>
+            <p>Pamantasan ng Lungsod ng Maynila</p>
+            
+          </div>
+        </div>
+      </div>
+    </StyledInterestsSection>
   );
 
-    
-
-  const items = [one, two, three, four, five];
+  const left = [photo, name, branding, socials];
+  const right = [about_header, about, interests_educ];
 
   return (
-    <PicturedHeroSection>
-        <StyledHeroSection>
-        {prefersReducedMotion ? (
-            <>
-            {items.map((item, i) => (
-                <div key={i}>{item}</div>
-            ))}
-                
-            </>
-            
-        ) : (
-            <TransitionGroup component={null}>
-            {isMounted &&
-                items.map((item, i) => (
-                <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                    <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-                </CSSTransition>
-                ))}
-                
-            </TransitionGroup>
-            
-        )}
-        </StyledHeroSection>
+    <PicturedHeroSection id="about">
+      <StyledHeroSection>
         <TransitionGroup component={null}>
-            {isMounted && (
-                <CSSTransition key={7} classNames="fadeup" timeout={loaderDelay}>
-                <img
-                    style={{ transitionDelay: `100ms` }}
-                    src="petecastle_frontpage.png"
-                    alt="PeteCastle_front"
-                />
-                </CSSTransition>
-            )}
+          {isMounted &&
+            left.map((item, i) => (
+              <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
+                <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
+              </CSSTransition>
+            ))}
+
         </TransitionGroup>
-        
-       
+      </StyledHeroSection>
+
+      <StyledRightSection>
+        <TransitionGroup component={null}>
+          {isMounted &&
+            right.map((item, i) => {
+              const i_ = i + left.length;
+              return (
+                <CSSTransition key={i_} classNames="fadeup" timeout={loaderDelay}>
+                  <div style={{ transitionDelay: `${i_}00ms` }}>{item}</div>
+                </CSSTransition>
+              );
+            })}
+        </TransitionGroup>
+      </StyledRightSection>
     </PicturedHeroSection>
-    
+
+
   );
 };
 
-export default Hero;
+export default Hero;  

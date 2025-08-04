@@ -31,6 +31,9 @@ import IconNode from './node';
 import IconHTML from './html';
 import IconCSS from './css';
 import IconGit from './git';
+import IconCV from './cv';
+import IconEmail  from './email';
+import IconPhone from './phone';
 
 
 
@@ -97,6 +100,12 @@ const Icon = ({ name }) => {
         return <IconCSS/>;  
     case 'Git':
         return <IconGit/>;
+    case 'CV':
+        return <IconCV />;
+    case 'Email':
+        return <IconEmail />;
+    case 'Phone':
+        return <IconPhone />;
       
     default:
       return <IconExternal />;

@@ -12,7 +12,7 @@ const StyledSideElement = styled.div`
   left: ${props => (props.orientation === 'left' ? '40px' : 'auto')};
   right: ${props => (props.orientation === 'left' ? 'auto' : '40px')};
   z-index: 10;
-  color: var(--light-slate);
+  color: var(--palette-4);
 
   @media (max-width: 1080px) {
     left: ${props => (props.orientation === 'left' ? '20px' : 'auto')};
@@ -26,7 +26,27 @@ const StyledSideElement = styled.div`
 
 const Side = ({ children, isHome, orientation }) => {
   const [isMounted, setIsMounted] = useState(!isHome);
+  const [isVisible, setIsVisible] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    const triggerElement = document.getElementById('about');
+    if (!triggerElement) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(!entry.isIntersecting); // show when target is OUT of view
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    observer.observe(triggerElement);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (!isHome || prefersReducedMotion) {
@@ -36,20 +56,16 @@ const Side = ({ children, isHome, orientation }) => {
     return () => clearTimeout(timeout);
   }, []);
 
+  const shouldShow = prefersReducedMotion || isMounted;
+
   return (
-    <StyledSideElement orientation={orientation}>
-      {prefersReducedMotion ? (
-        <>{children}</>
-      ) : (
-        <TransitionGroup component={null}>
-          {isMounted && (
-            <CSSTransition classNames={isHome ? 'fade' : ''} timeout={isHome ? loaderDelay : 0}>
-              {children}
-            </CSSTransition>
-          )}
-        </TransitionGroup>
-      )}
-    </StyledSideElement>
+    <CSSTransition
+      in={shouldShow && isVisible}
+      timeout={300}
+      classNames="fade"
+      unmountOnExit>
+      <StyledSideElement orientation={orientation}>{children}</StyledSideElement>
+    </CSSTransition>
   );
 };
 
