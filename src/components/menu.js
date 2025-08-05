@@ -25,7 +25,7 @@ const StyledHamburgerButton = styled.button`
     padding: 15px;
     border: 0;
     background-color: transparent;
-    color: inherit;
+    color: var(--palette-4);
     text-transform: none;
     transition-timing-function: linear;
     transition-duration: 0.15s;
@@ -46,7 +46,7 @@ const StyledHamburgerButton = styled.button`
     width: var(--hamburger-width);
     height: 2px;
     border-radius: var(--border-radius);
-    background-color: var(--palette-1);
+    background-color: var(--palette-4);
     transition-duration: 0.22s;
     transition-property: transform;
     transition-delay: ${props => (props.menuOpen ? `0.12s` : `0s`)};
@@ -64,7 +64,7 @@ const StyledHamburgerButton = styled.button`
       width: var(--hamburger-width);
       height: 2px;
       border-radius: 4px;
-      background-color: var(--palette-1);
+      background-color: var(--palette-4);
       transition-timing-function: ease;
       transition-duration: 0.15s;
       transition-property: transform;
@@ -266,7 +266,7 @@ const Menu = () => {
               </ol>
             )}
 
-            <a href="Francis Mark Cayco - Resume V1.6.pdf" className="resume-link" target="_blank" rel="noopener noreferrer">
+            <a href="Francis Mark Cayco - Resume Latest.pdf" className="resume-link" target="_blank" rel="noopener noreferrer">
               Resume
             </a>
           </nav>

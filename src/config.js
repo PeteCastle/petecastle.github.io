@@ -2,20 +2,32 @@ module.exports = {
   email: 'francis_mark_cayco@yahoo.com',
   technical_profile: [
     {
-      name :  '💻 Programming Languages',
-      skills : ['Python', 'C++', 'JavaScript','Java']
+      name: 'Programming Languages',
+      skills: ['Python', 'JavaScript', 'C++']
     },
     {
-      name : '📈 Data Science and Analytics',
-      skills : ['Pandas', 'Numpy', 'Matplotlib', 'Scikit-Learn', 'PostgreSQL', 'Jupyter'] // , 'Pytorch'
+      name: 'Data Science Tools',
+      skills: ['Pandas', 'Numpy', 'Matplotlib', 'PostgreSQL', 'Jupyter', 'SQL', 'Tableau','SHAP','LIME']
     },
     {
-      name : '📐 Data Engineering',
-      skills : ['Linux','Prefect', 'Git']
+      name: 'Machine Learning & Optimization',
+      skills: ['Scikit-Learn', 'Optuna', 'PyTorch', 'TensorFlow', 'NetworkX']
     },
     {
-      name : '💻 Web Development',
-      skills : ['Django', 'HTMX', 'Node', 'HTML', 'CSS']
+      name: 'Big Data and Cloud Computing',
+      skills: ['Apache Spark', 'Linux', 'Prefect', 'AWS', 'Amazon S3', 'GCP','Airbyte']
+    },
+    {
+      name: 'Machine Learning Operations',
+      skills: ['Docker', 'Airflow', 'MLflow']
+    },
+    {
+      name: 'CI/CD and Testing',
+      skills: ['Git', 'Linux', 'Pytest']
+    },
+    {
+      name: 'Web Development',
+      skills: ['Flask', 'FastAPI', 'Nginx', 'Django', 'HTMX', 'Node', 'HTML', 'CSS']
     }
   ],
   certifications:[
@@ -99,7 +111,7 @@ module.exports = {
     },
     {
       name: 'CV',
-      url: 'https://petecastle.github.io/Francis Mark Cayco - Resume V2.1.1.pdf',
+      url: '/Francis Mark Cayco - Resume Latest.pdf',
     }
   ],
 
@@ -109,21 +121,22 @@ module.exports = {
       url: '/#about',
     },
     {
-      name: 'Skills',
-      url: '/#skills',
-    },
-    {
       name: 'Work',
       url: '/#work',
-    },
-    {
-      name: 'Certifications',
-      url: '/#certifications',
     },
     {
       name: 'Projects',
       url: '/#projects',
     },
+    {
+      name: 'Skills',
+      url: '/#skills',
+    },
+    {
+      name: 'Certifications',
+      url: '/#certifications',
+    },
+    
   ],
 
   colors: {

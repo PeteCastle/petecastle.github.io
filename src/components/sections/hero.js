@@ -17,7 +17,7 @@ const PicturedHeroSection = styled.section`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 0 20px;
+    padding: 100px 0 20px;
   }
 
   img {
@@ -147,7 +147,7 @@ const StyledHeroSection = styled.section`
 
 const StyledInterestsSection = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 25px;
   margin-top: 40px;
   width: 100%;
@@ -167,17 +167,19 @@ const StyledInterestsSection = styled.div`
 
   .interests ul {
     padding-left: 20px;
+    columns: 2;
+    column-gap: 40px;
   }
 
   .education-entry {
     display: flex;
     align-items: flex-start;
-    gap: 5px;
+    gap: 10px;
     margin-bottom: 20px;
 
     img {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       object-fit: contain;
       margin-top: 4px;
     }
@@ -241,7 +243,7 @@ const Hero = () => {
         <b>Full-stack Data Scientist</b> with a strong foundation in machine learning, backend development, and data engineering. Skilled in building robust, explainable ML models and deploying scalable systems across cloud platforms. Experienced in MLOps, API development, and orchestrating data pipelines that power real-time insights and strategic decisions.
       </p>
       <p>
-        In 2022, I found myself asking, “How can businesses make meaningful decisions from the vast amounts of customer data?” That simple question led me to a TED Talk—and ultimately introduced me to the world of data science. Since then, I’ve been deeply engaged in exploring how data can drive insights, solve real-world problems, and shape smarter decisions.
+        Kiko's path into data science began with a simple yet powerful question in 2022: <i>“How can businesses make meaningful decisions from the vast amounts of customer data?”</i> What started as curiosity sparked by a TED Talk quickly evolved into a deep, disciplined pursuit of knowledge in data science. Passionate about applying data for social and strategic value, Francis continues to explore how intelligent systems can help shape a more informed, equitable future.
       </p>
     </>
   );
@@ -251,7 +253,9 @@ const Hero = () => {
       <div className="interests">
         <h3>Interests</h3>
         <ul>
-          <li>Data Science, AI, and Machine Learning</li>
+          <li>Data Science</li>
+          <li>Artificial Intelligence</li>
+          <li>Machine Learning</li>
           <li>Predictive Analytics</li>
           <li>Data Engineering</li>
           <li>Machine Learning Operations</li>
@@ -266,7 +270,7 @@ const Hero = () => {
         <div className="education-entry">
           <img src="asian-institute-of-management.webp" alt="AIM Logo" />
           <div className="text">
-            <h4>MSc in Data Science, 2025</h4>
+            <h4>Master of Science in Data Science, 2025</h4>
             <p>Asian Institute of Management</p>
           </div>
         </div>
@@ -274,7 +278,7 @@ const Hero = () => {
         <div className="education-entry">
           <img src="PLM_Seal_2013.png" alt="PLM Logo" />
           <div className="text">
-            <h4>BSc in Computer Engineering, 2024</h4>
+            <h4>Bachelor of Science in Computer Engineering, 2024</h4>
             <p><i>Summa Cum Laude</i></p>
             <p>Pamantasan ng Lungsod ng Maynila</p>
             

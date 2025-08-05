@@ -1,13 +1,14 @@
 import React from 'react';
 
-const LogoPrefect = (props) => (
+const IconAWS = (props) => (
   <img
-    src="https://images.seeklogo.com/logo-png/43/2/prefect-logo-png_seeklogo-438351.png"
+    src="https://en.m.wikipedia.org/wiki/File:Amazon_Web_Services_Logo.svg"
+    alt="Amazon Web Services logo"
     width={props.width || 40}
     height={props.height || 40}
     style={props.style || { display: 'block', margin: 'auto' }}
     {...props}
-  />
+    />
 );
 
-export default LogoPrefect;
+export default IconAWS;

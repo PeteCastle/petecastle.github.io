@@ -1,8 +1,9 @@
 import React from 'react';
 
-const LogoPrefect = (props) => (
+const IconSpark = (props) => (
   <img
-    src="https://images.seeklogo.com/logo-png/43/2/prefect-logo-png_seeklogo-438351.png"
+    src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg"
+    alt="Apache Spark logo"
     width={props.width || 40}
     height={props.height || 40}
     style={props.style || { display: 'block', margin: 'auto' }}
@@ -10,4 +11,4 @@ const LogoPrefect = (props) => (
   />
 );
 
-export default LogoPrefect;
+export default IconSpark;

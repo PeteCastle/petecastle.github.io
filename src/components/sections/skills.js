@@ -1,345 +1,215 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { CSSTransition } from 'react-transition-group';
+import React from 'react';
 import styled from 'styled-components';
-import { srConfig, technical_profile } from '@config';
-import { KEY_CODES } from '@utils';
-import sr from '@utils/sr';
-import { usePrefersReducedMotion } from '@hooks';
-
-import Icon from '@icons/icon'
-
-const StyledSkillsSection = styled.section`
-  max-width: 700px;
-
-  .inner {
-    display: flex;
-
-    @media (max-width: 600px) {
-      display: block;
-    }
-
-    
-  }
-`;
-
-const StyledTabList = styled.div`
-  position: relative;
-  z-index: 3;
-  width: max-content;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-
-  @media (max-width: 600px) {
-    display: flex;
-    overflow-x: auto;
-    width: calc(100% + 100px);
-    padding-left: 50px;
-    margin-left: -50px;
-    margin-bottom: 30px;
-  }
-  @media (max-width: 480px) {
-    width: calc(100% + 50px);
-    padding-left: 25px;
-    margin-left: -25px;
-  }
-
-  li {
-    &:first-of-type {
-      @media (max-width: 600px) {
-        margin-left: 50px;
-      }
-      @media (max-width: 480px) {
-        margin-left: 25px;
-      }
-    }
-    &:last-of-type {
-      @media (max-width: 600px) {
-        padding-right: 50px;
-      }
-      @media (max-width: 480px) {
-        padding-right: 25px;
-      }
-    }
-  }
-`;
-
-const StyledTabButton = styled.button`
-  ${({ theme }) => theme.mixins.link};
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: var(--tab-height);
-  padding: 0 20px 2px;
-  border-left: 2px solid var(--palette-4);
-  background-color: transparent;
-  color: ${({ isActive }) => (isActive ? 'var(--palette-3)' : '--palette-1')};
-  font-family: var(--font-mono);
-  font-size: var(--fz-xs);
-  text-align: left;
-  white-space: nowrap;
-
-  @media (max-width: 768px) {
-    padding: 0 15px 2px;
-  }
-  @media (max-width: 600px) {
-    ${({ theme }) => theme.mixins.flexCenter};
-    min-width: 260px;
-    padding: 0 15px;
-    border-left: 0;
-    border-bottom: 2px solid var(--palette-4);
-    text-align: center;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: var(--palette-2);
-  }
-`;
-
-const StyledHighlight = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 2px;
-  height: var(--tab-height);
-  border-radius: var(--border-radius);
-  background: var(--palette-3);
-  transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
-  transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition-delay: 0.1s;
-
-  @media (max-width: 600px) {
-    top: auto;
-    bottom: 0;
-    width: 100%;
-    max-width: var(--tab-width);
-    height: 2px;
-    margin-left: 50px;
-    transform: translateX(calc(${({ activeTabId }) => activeTabId} * var(--tab-width)));
-  }
-  @media (max-width: 480px) {
-    margin-left: 25px;
-  }
-`;
-
-
-const StyledTabPanels = styled.div`
-  position: relative;
-  width: 100%;
-  margin-left: 20px;
-
-  @media (max-width: 600px) {
-    margin-left: 0;
-  }
-`;
-
-const StyledTabPanel = styled.div`
-  width: 100%;
-  height: auto;
-
-  ul {
-    ${({ theme }) => theme.mixins.fancyList};
-  }
-
-  h3 {
-    margin-bottom: 2px;
-    font-size: var(--fz-xxl);
-    font-weight: 500;
-    line-height: 1.3;
-
-    .company {
-      color: var(--palette-1);
-    }
-  }
-
-  .range {
-    margin-bottom: 25px;
-    color: var(--light-slate);
-    font-family: var(--font-mono);
-    font-size: var(--fz-xs);
-  }
-
-  
-  
-
-  fieldset{
-    border: none;
-    padding: 0px;
-    ul {
-      display: flex;
-      padding: 0px;
-      justify-content: space-evenly;
-      align-items: stretch;
-      align-content: stretch;
-      flex-wrap: wrap;
-      
-    }
-
-    li{
-      
-      padding: 10px;
-      
-      position: relative;
-      border: 1px solid var(--lightest-grey);
-    }
-    li::before {
-      display:none;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    h4 {
-      margin-top: 10px;
-      margin-bottom: 0px;
-      text-align: center;
-
-    }
-
-    
-
-    svg {
-      width: 40px;
-      height: 40px;
-      display: block;
-      
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center
-
-    }
-  }
-    
-  
-`;
-
-
+import { technical_profile } from '@config';
 
 const Skills = () => {
-
-
-  const [activeTabId, setActiveTabId] = useState(0);
-  const [tabFocus, setTabFocus] = useState(null);
-  const tabs = useRef([]);
-  const revealContainer = useRef(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    sr.reveal(revealContainer.current, srConfig());
-  }, []);
-
-  const focusTab = () => {
-    if (tabs.current[tabFocus]) {
-      tabs.current[tabFocus].focus();
-      return;
-    }
-    // If we're at the end, go to the start
-    if (tabFocus >= tabs.current.length) {
-      setTabFocus(0);
-    }
-    // If we're at the start, move to the end
-    if (tabFocus < 0) {
-      setTabFocus(tabs.current.length - 1);
-    }
-  };
-
-  // Only re-run the effect if tabFocus changes
-  useEffect(() => focusTab(), [tabFocus]);
-
-  // Focus on tabs when using up & down arrow keys
-  const onKeyDown = e => {
-    switch (e.key) {
-      case KEY_CODES.ARROW_UP: {
-        e.preventDefault();
-        setTabFocus(tabFocus - 1);
-        break;
-      }
-
-      case KEY_CODES.ARROW_DOWN: {
-        e.preventDefault();
-        setTabFocus(tabFocus + 1);
-        break;
-      }
-
-      default: {
-        break;
-      }
-    }
-  };
-
   return (
-    <StyledSkillsSection id="skills" ref={revealContainer}>
+    <StyledSkillsSection id="skills">
       <h2 className="numbered-heading">My Technical Profile</h2>
+      
+    {/* Desktop View */}
+    <div className="skill-columns">
+      {technical_profile.map((category, i) => (
+        <div className="skill-column" key={i}>
+          <h4>{category.name}</h4>
+          <ul>
+            {category.skills.map((skill, j) => (
+              <li key={j}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
 
-      <div className="inner">
-        <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
-          {technical_profile &&
-            technical_profile.map((obj, i) => {
-        
-              return (
-                <StyledTabButton
-                  key={i}
-                  isActive={activeTabId === i}
-                  onClick={() => setActiveTabId(i)}
-                  ref={el => (tabs.current[i] = el)}
-                  id={`tab-${i}`}
-                  role="tab"
-                  tabIndex={activeTabId === i ? '0' : '-1'}
-                  aria-selected={activeTabId === i ? true : false}
-                  aria-controls={`panel-${i}`}>
-                  <span>{obj.name}</span>
-                </StyledTabButton>
-              );
-            })}
-          <StyledHighlight activeTabId={activeTabId} />
-        </StyledTabList>
+    {/* Mobile View */}
+    {technical_profile.map((category, i) => (
+      <details className="skill-dropdown" key={i}>
+        <summary>{category.name}</summary>
+        <div className="dropdown-content">
+          <ul>
+            {category.skills.map((skill, j) => (
+              <li key={j}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      </details>
+    ))}
 
-        <StyledTabPanels>
-          {technical_profile &&
-            technical_profile.map((obj,i) => {
-              
-
-              return (
-                <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
-                  <StyledTabPanel
-                    id={`panel-${i}`}
-                    role="tabpanel"
-                    tabIndex={activeTabId === i ? '0' : '-1'}
-                    aria-labelledby={`tab-${i}`}
-                    aria-hidden={activeTabId !== i}
-                    hidden={activeTabId !== i}>
-                      
-                      <fieldset>
-                        <ul> {
-                            obj.skills.map((skill, i) => {
-                              console.log(skill);
-                              return (
-                                <li>
-                                <Icon name={skill} />
-                                <h4>{skill}</h4>
-                                 </li>
-                              )
-                            })
-                          
-                          }
-                          </ul>
-                      </fieldset>
-
-                  </StyledTabPanel>
-                </CSSTransition>
-              );
-            })}
-        </StyledTabPanels>
-      </div>
     </StyledSkillsSection>
   );
 };
+
+const StyledSkillsSection = styled.section`
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .skill-columns {
+    column-count: 3;
+    column-gap: 40px;
+  }
+
+  @media (max-width: 1024px) {
+    .skill-columns {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .skill-columns {
+      column-count: 1;
+    }
+  }
+
+  .skill-column {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    flex: 1 1 200px;
+    min-width: 200px;
+    margin-bottom: 32px;
+  }
+
+  .skill-column h4 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .skill-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skill-column li {
+    margin-bottom: 8px;
+    color: var(--palette-4);
+    font-size: var(--fz-lg);
+    font-weight: 500;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .skill-column li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--palette-3);
+    font-size: var(--fz-md);
+    line-height: 1;
+  }
+
+  .skill-dropdown {
+    margin: 16px 0 32px;
+  }
+
+  .skill-dropdown summary {
+    font-weight: bold;
+    font-size: var(--fz-lg);
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid var(--palette-3);
+  }
+
+  .skill-dropdown summary::after {
+    content: '▾';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: var(--fz-md);
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+  }
+
+  .skill-dropdown[open] summary {
+    margin-bottom: 10px;
+  }
+
+  .skill-dropdown[open] summary::after {
+    transform: rotate(180deg);
+  }
+
+  .skill-dropdown ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+    column-count: 2;
+    column-gap: 20px;
+  }
+
+  .skill-dropdown li {
+    margin-bottom: 8px;
+    color: var(--palette-4);
+    font-size: var(--fz-lg);
+    font-weight: 500;
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .skill-dropdown li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--palette-3);
+    font-size: var(--fz-md);
+    line-height: 1;
+  }
+
+  .skill-dropdown .dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    animation: hideContent 1s ease forwards;
+  }
+
+  .skill-dropdown[open] .dropdown-content {
+    animation: showContent 1s ease forwards;
+  }
+
+  @media (max-width: 400px) {
+    .skill-dropdown ul {
+      column-count: 1;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .skill-dropdown {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .skill-columns {
+      display: none;
+    }
+
+    .skill-dropdown {
+      display: block;
+    }
+  }
+
+  @keyframes showContent {
+    from {
+      max-height: 0;
+      opacity: 0;
+    }
+    to {
+      max-height: 500px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes hideContent {
+    from {
+      max-height: 500px;
+      opacity: 1;
+    }
+    to {
+      max-height: 0;
+      opacity: 0;
+    }
+  }
+`;
 
 export default Skills;

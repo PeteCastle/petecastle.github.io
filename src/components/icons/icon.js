@@ -34,12 +34,36 @@ import IconGit from './git';
 import IconCV from './cv';
 import IconEmail  from './email';
 import IconPhone from './phone';
-
-
-
+import IconSQL from './sql';
+import IconTableau from './tableau';
+import IconShap from './shap';
+import IconOptuna from './optuna';
+import IconPyTorch from './pytorch';
+import IconTensorFlow from './tensorflow';
+import IconNetworkX from './networkx';
+import IconSpark from './spark';
+import IconAWS from './aws';
 
 const Icon = ({ name }) => {
   switch (name) {
+    case 'AWS':
+      return <IconAWS />;
+    case 'Apache Spark':
+      return <IconSpark />;
+    case 'NetworkX':
+      return <IconNetworkX />;
+    case 'TensorFlow':
+      return <IconTensorFlow />;
+    case 'PyTorch':
+      return <IconPyTorch />;
+    case 'Optuna':
+      return <IconOptuna />;
+    case 'SHAP  ':
+      return <IconShap />;
+    case 'Tableau':
+      return <IconTableau />;
+    case 'SQL':
+      return <IconSQL />;
     case 'Bookmark':
       return <IconBookmark />;
     case 'External':
