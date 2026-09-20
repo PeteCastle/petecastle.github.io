@@ -266,7 +266,7 @@ const Menu = () => {
               </ol>
             )}
 
-            <a href="Francis Mark Cayco - Resume Latest.pdf" className="resume-link" target="_blank" rel="noopener noreferrer">
+            <a href="/Francis Mark Cayco - Resume Latest.pdf" className="resume-link" target="_blank" rel="noopener noreferrer">
               Resume
             </a>
           </nav>

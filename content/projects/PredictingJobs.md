@@ -6,7 +6,7 @@ github: 'https://github.com/PeteCastle/multiclass-multioutput-classification'
 tech:
     - Multi-Class Multi-Output Classification
     - NLTK
-    - Imbalnced Learning
+    - Imbalanced Learning
     - Pandas
 showInProjects: true
 ---

@@ -7,7 +7,7 @@ tech:
     - Pandas
     - Sklearn
     - Numpy
-    - Matlotlib
+    - Matplotlib
     - Seaborn
 showInProjects: true
 ---

@@ -19,7 +19,7 @@ const Header = ({ title, description, image }) =>{
             defaultDescription: description
             siteUrl
             defaultImage: image
-            twitter
+            twitterUsername: twitter
           }
         }
       }

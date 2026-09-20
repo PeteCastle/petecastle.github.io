@@ -9,4 +9,4 @@ tech:
     - Apache Spark
 showInProjects: true
 ---
-This study analyzes how urban amenities influence air quality in Philippine cities using machine learning and geospatial data. By identifying key amenities linked to poor AQI and simulating planning interventions, it offers actionable insights for sustainable urban design. Results show that amenities like bars and fast food correlate with worse air quality, while schools and green spaces are linked to better conditions.
+Quantifies how long air pollution lingers in cities after peak events by fitting exponential decay curves to 2021 OpenAQ measurements (PM2.5, PM10, NO₂, O₃, CO, SO₂) with Apache Spark, producing a Pollution Memory Index with half-life and memory-duration metrics per city. Results show U.S. metros dominating particulate memory, South African cities retaining CO and NO₂ longest, and Italian coastal areas trapping ozone, pointing to urban form, meteorology and governance as drivers.

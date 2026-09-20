@@ -116,7 +116,7 @@ const Footer = () => {
 
       <StyledCredit tabindex="-1">
         <IconLogo />
-        <div className='author'><b>© 2025 Francis Mark Cayco</b></div>
+        <div className='author'><b>© {new Date().getFullYear()} Francis Mark Cayco</b></div>
         <a href="https://github.com/bchiang7/v4">
           <div><i>Template inspired from Brittany Chiang</i></div>
         </a>

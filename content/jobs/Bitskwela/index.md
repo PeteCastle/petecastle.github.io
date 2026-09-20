@@ -1,13 +1,16 @@
 ---
-date: '2024-01-09'
+date: '2023-07-01'
 title: 'Backend Developer'
 company: 'Bitskwela'
 company_short: 'Bitskwela'
-location: 'Remote'
+location: 'Manila, Philippines'
 range: 'July 2023 - July 2025'
 url: 'https://www.bitskwela.com'
 type: 'Professional'
 company_description: 'Bitskwela is a Philippine-based EdTech company that focuses on accelerating regional crypto adoption through high-quality Web3 education.'
 ---
-- Built a comprehensive backend API using Django REST Framework for an emerging blockchain developer platform, integrating HTTPS, WebSocket, and webhooks to support real-time and secure communication.
-- Developed a Single Sign-On (SSO) module using OAuth 2.0 to unify user authentication across all Bitskwela services.
+- Created a comprehensive API using Django REST Framework incorporating webhooks, WebSocket and HTTPS, and built the API for Bitscorer (bitscorer.com), Bitskwela's emerging blockchain developer platform.
+- Developed the company's Single Sign-On module using OAuth 2.0 to unify the account system across all Bitskwela services.
+- Deployed and managed the website's backend infrastructure and database management system on DigitalOcean, creating and optimizing databases with effective data-modeling techniques for storage and retrieval efficiency.
+- Collaborated within a small team of frontend, UI and UX developers using GitHub and Figma for cohesive, end-to-end project delivery.
+- Joined as Backend Developer Intern (July - October 2023) and became Backend Developer in October 2023.

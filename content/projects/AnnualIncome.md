@@ -4,11 +4,12 @@ title: 'Predicting Filipino Family Annual Income'
 github: 'https://github.com/PeteCastle/Predicting-Filipino-Family-Annual-Income'
 
 tech:
+    - Ridge Regression
     - Seaborn
     - Pandas
     - Numpy
-    - Sklearn  
+    - Sklearn
 showInProjects: true
 ---
 
-This ETL project extracts and transforms hospitality and location data from TripAdvisor, RapidAPI, Philippine Statistics Authority OpenStat, and Humanitarian Data Exchange. The datasets cover hotel reviews, tourist sites, and general location data.
+Machine learning model that predicts a Filipino family's annual income from socioeconomic factors, reaching 86.13% accuracy with Ridge Regression, with actionable recommendations for policymakers and government agencies.

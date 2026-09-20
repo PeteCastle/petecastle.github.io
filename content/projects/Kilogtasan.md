@@ -1,11 +1,12 @@
 ---
 date: '2023-09-21'
 title: 'KilogTasan: Early Flood Warning System'
-github: 'https://github.com/PeteCastle/website'
+github: 'https://github.com/PeteCastle/Arduino-Flood-Warning-System'
 youtube: 'https://www.youtube.com/watch?v=hcCMMzInmZ4&t=3s'
 tech:
   - Arduino
   - C++
+  - IoT
 showInProjects: true
 ---
 

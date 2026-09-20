@@ -163,6 +163,16 @@ const StyledTabPanel = styled.div`
     color: var(--palette-4);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
+
+    .type-label {
+      margin-left: 10px;
+      color: var(--palette-3);
+
+      &:before {
+        content: '·';
+        margin-right: 10px;
+      }
+    }
   }
 `;
 
@@ -171,7 +181,7 @@ const Jobs = () => {
     query {
       jobs: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
-        sort: {frontmatter: {date: ASC}}
+        sort: {frontmatter: {date: DESC}}
       ) {
         edges {
           node {
@@ -249,7 +259,7 @@ const Jobs = () => {
 
   return (
     <StyledJobsSection id="work" ref={revealContainer}>
-      <h2 className="numbered-heading">Professional Experience</h2>
+      <h2 className="numbered-heading">Experience</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
@@ -300,7 +310,10 @@ const Jobs = () => {
                       
                     </h3>
 
-                    <p className="range">{range}</p>
+                    <p className="range">
+                      {range}
+                      {type && type !== 'Professional' && <span className="type-label">{type}</span>}
+                    </p>
                     
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                    

@@ -12,9 +12,9 @@ module.exports = {
 
  
   siteMetadata: {
-    title: `FM Cayco`,
-    description: `Senior computer engineering student driven by strong interest in the fields of data science and engineering.`,
-    siteUrl: `https://petecastle.github.io`,
+    title: `Francis Mark Cayco`,
+    description: `Data Scientist in corporate finance and freelance ETL Developer for e-commerce analytics who scopes, builds, tests and deploys automation, machine-learning and data-pipeline solutions, then drives their adoption through consultancy and teach-back sessions.`,
+    siteUrl: `https://www.franciscayco.com`,
     image: '/og_image.png',
     twitter: 'petecastle_pro',
   },

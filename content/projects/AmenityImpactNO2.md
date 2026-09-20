@@ -1,7 +1,7 @@
 ---
 date: '2025-06-10'
 title: 'Understanding the Shifting Impact of Amenities on NO₂ Levels'
-github: 'https://github.com/PeteCastle/bdcc-final-projec'
+github: 'https://github.com/PeteCastle/bdcc-final-project'
 
 tech:
     - AWS S3
@@ -11,4 +11,4 @@ tech:
     - Counterfactual Analysis
 showInProjects: true
 ---
-This study uses machine learning and geospatial data to examine how urban amenities affect air quality across 138 Philippine cities. It identifies specific amenities such as schools that are associated with varying AQI levels, and employs counterfactual analysis to simulate how adjusting these features could improve air quality. The findings offer data-driven insights for sustainable urban planning and zoning policies.
+Big-data study of how the relationship between urban amenities and NO₂ levels shifted during the COVID-19 pandemic: amenity footprints from OpenStreetMap (OSMnx) and GADM boundaries are joined to OpenWeatherMap air-quality data on AWS S3, and interpretable models with counterfactual analysis show which amenity types drove NO₂ before, during and after lockdowns.

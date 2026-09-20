@@ -177,6 +177,10 @@ const StyledInterestsSection = styled.div`
     gap: 10px;
     margin-bottom: 20px;
 
+    &.no-logo {
+      padding-left: 50px; /* 40px logo + 10px gap keeps text aligned with logo entries */
+    }
+
     img {
       width: 40px;
       height: 40px;
@@ -220,7 +224,7 @@ const Hero = () => {
     alt="PeteCastle_front"
   />;
   const name = <h2>Francis Mark Cayco</h2>;
-  const branding = <h3>Full Stack Data Scientist and ETL Developer</h3>;
+  const branding = <h3>Data Scientist · ETL Developer</h3>;
   
   const socials = <StyledSocialList>
     {socialMedia &&
@@ -240,7 +244,7 @@ const Hero = () => {
   const about = (
     <>
       <p>
-        <b>Full-stack Data Scientist</b> with a strong foundation in machine learning, backend development, and data engineering. Skilled in building robust, explainable ML models and deploying scalable systems across cloud platforms. Experienced in MLOps, API development, and orchestrating data pipelines that power real-time insights and strategic decisions.
+        <b>Full-lifecycle data professional</b> working as a Data Scientist in corporate finance and as a freelance ETL Developer for e-commerce analytics: he scopes, builds, tests and deploys automation, machine-learning and data-pipeline solutions, then drives their adoption through consultancy and teach-back sessions. MS Data Science (AIM) and BS Computer Engineering, <i>summa cum laude</i>.
       </p>
       <p>
         Kiko's path into data science began with a simple yet powerful question in 2022: <i>“How can businesses make meaningful decisions from the vast amounts of customer data?”</i> What started as curiosity sparked by a TED Talk quickly evolved into a deep, disciplined pursuit of knowledge in data science. Passionate about applying data for social and strategic value, Francis continues to explore how intelligent systems can help shape a more informed, equitable future.
@@ -262,6 +266,7 @@ const Hero = () => {
           <li>Explainable AI</li>
           <li>Network Science</li>
         </ul>
+        <p className="languages"><b>Languages:</b> English (professional proficiency) · Filipino (native)</p>
       </div>
 
       <div className="education">
@@ -271,6 +276,7 @@ const Hero = () => {
           <img src="asian-institute-of-management.webp" alt="AIM Logo" />
           <div className="text">
             <h4>Master of Science in Data Science, 2025</h4>
+            <p><i>GPA 4.25 · Aboitiz Scholarship Grantee</i></p>
             <p>Asian Institute of Management</p>
           </div>
         </div>
@@ -279,9 +285,24 @@ const Hero = () => {
           <img src="PLM_Seal_2013.png" alt="PLM Logo" />
           <div className="text">
             <h4>Bachelor of Science in Computer Engineering, 2024</h4>
-            <p><i>Summa Cum Laude</i></p>
+            <p><i>Summa Cum Laude · GWA 1.2351</i></p>
             <p>Pamantasan ng Lungsod ng Maynila</p>
-            
+          </div>
+        </div>
+
+        <div className="education-entry no-logo">
+          <div className="text">
+            <h4>Senior High School – STEM, Computer Science Specialization, 2020</h4>
+            <p><i>With Honors (Final Grade 94.00)</i></p>
+            <p>Far Eastern University – Alabang</p>
+          </div>
+        </div>
+
+        <div className="education-entry no-logo">
+          <div className="text">
+            <h4>Junior High School, 2018</h4>
+            <p><i>With Honors (Final Grade 94.539) · Antonio Laperal Tamayo Award for Leadership</i></p>
+            <p>University of Perpetual Help – Molino Campus</p>
           </div>
         </div>
       </div>

@@ -3,34 +3,55 @@ module.exports = {
   technical_profile: [
     {
       name: 'Programming Languages',
-      skills: ['Python', 'JavaScript', 'C++']
+      skills: ['Python', 'JavaScript', 'TypeScript', 'Java', 'C++', 'SQL', 'Bash']
     },
     {
-      name: 'Data Science Tools',
-      skills: ['Pandas', 'Numpy', 'Matplotlib', 'PostgreSQL', 'Jupyter', 'SQL', 'Tableau','SHAP','LIME']
+      name: 'Data Analysis & Visualization',
+      skills: ['Pandas', 'NumPy', 'Polars', 'Matplotlib', 'Jupyter', 'Power BI', 'Tableau', 'Microsoft Excel']
     },
     {
-      name: 'Machine Learning & Optimization',
-      skills: ['Scikit-Learn', 'Optuna', 'PyTorch', 'TensorFlow', 'NetworkX']
+      name: 'Machine Learning & Explainable AI',
+      skills: ['scikit-learn', 'PyTorch', 'TensorFlow', 'XGBoost', 'Optuna', 'NetworkX', 'SHAP', 'LIME']
     },
     {
-      name: 'Big Data and Cloud Computing',
-      skills: ['Apache Spark', 'Linux', 'Prefect', 'AWS', 'Amazon S3', 'GCP','Airbyte']
+      name: 'Data Engineering & Orchestration',
+      skills: ['Apache Spark', 'Prefect', 'Dagster', 'Airflow', 'dbt', 'Airbyte', 'Databricks', 'Azure Data Factory', 'PostgreSQL']
     },
     {
-      name: 'Machine Learning Operations',
-      skills: ['Docker', 'Airflow', 'MLflow']
+      name: 'Cloud & Infrastructure',
+      skills: ['AWS', 'Amazon S3', 'Azure', 'Azure Blob Storage', 'GCP', 'DigitalOcean', 'Linux', 'Nginx', 'Terraform']
     },
     {
-      name: 'CI/CD and Testing',
-      skills: ['Git', 'Linux', 'Pytest']
+      name: 'MLOps, CI/CD & Testing',
+      skills: ['Docker', 'MLflow', 'Git', 'GitHub', 'Pytest', 'Postman']
     },
     {
-      name: 'Web Development',
-      skills: ['Flask', 'FastAPI', 'Nginx', 'Django', 'HTMX', 'Node', 'HTML', 'CSS']
+      name: 'Web Development & APIs',
+      skills: ['Django', 'Django REST Framework', 'Flask', 'FastAPI', 'REST APIs', 'HTMX', 'Node.js', 'HTML', 'CSS']
+    },
+    {
+      name: 'Design & Productivity',
+      skills: ['Figma', 'Canva', 'Microsoft Word']
     }
   ],
   certifications:[
+    {
+      name :  'Data Engineer Pathway Completer',
+      date_acquired: 'November 29, 2023',
+      issuer: 'Development Academy of the Philippines (Project SPARTA)',
+      file: 'Data Engineer Pathway.jpg',
+      skills : [
+        'Public Policy and Governance',
+        'Computing Microspecialization',
+        'Data-Driven Research',
+        'Enterprise Data Governance',
+        'Data-Driven Policy Analysis',
+        'Advanced Data Engineering',
+        'SQL for Data Engineering',
+        'Dashboards and Drill-Down Analytics',
+        'Data Management Fundamentals',
+      ]
+    },
     {
       name :  'Data Engineer Associate',
       date_acquired: 'July 27, 2023',
@@ -38,35 +59,6 @@ module.exports = {
       file: 'DEA0016805525402.jpg',
       external_link: 'https://www.datacamp.com/certificate/DEA0016805525402',
       skills : ['Data Engineering Fundamentals', 'Database Management','Data Management','Programming for Data Engineering']
-
-    },
-    {
-      name :  'Data Engineer Pathway Completer',
-      date_acquired: 'December 6, 2023',
-      issuer: 'Development Academy of the Philippines',
-      file: 'Data Engineer Pathway.jpg',
-      skills : [
-        'Public Policy and Governance', 
-        'Computing Microspecialization', 
-        'Data-Driven Research',
-        'Enterprise Data Governance',
-        'Data-Driven Policy Analysis',
-        'Advanced Data Engineering',
-        'SQL for Data Engineering',
-        'Dashboards and Drill-Down Analytics',
-        'Data Management Fundamentals'
-        ,
-      ]
-
-    },
-    {
-      name :  'Data Scientist Professional',
-      date_acquired: 'August 27, 2022',
-      issuer: 'DataCamp',
-      file: 'DS0012206974560.jpg',
-      external_link: 'https://www.datacamp.com/certificate/DS0012206974560',
-      skills : ['Data Management', 'Model Development', 'Statistical Experimentation','Exploratory Analysis','Communication and Reporting']
-
     },
     {
       name :  'Data Engineering Zoomcamp',
@@ -75,7 +67,14 @@ module.exports = {
       file: 'DEZoomcamp.jpg',
       external_link: 'https://certificate.datatalks.club/dezoomcamp/2023/6ebba68872f2c7756d723394229b8ac07f3d49f7.pdf',
       skills : ['Prefect', 'dbt', 'Azure Cloud','Terraform','PowerBI','Databricks']
-
+    },
+    {
+      name :  'Data Scientist Professional',
+      date_acquired: 'August 26, 2022',
+      issuer: 'DataCamp',
+      file: 'DS0012206974560.jpg',
+      external_link: 'https://www.datacamp.com/certificate/DS0012206974560',
+      skills : ['Data Management', 'Model Development', 'Statistical Experimentation','Exploratory Analysis','Communication and Reporting']
     },
     {
       name :  'Data Analyst Professional',
@@ -84,9 +83,7 @@ module.exports = {
       file: 'DA0011795037658.jpg',
       external_link: 'https://www.datacamp.com/certificate/DA0011795037658',
       skills : ['Analytic Fundamentals', 'Data Management', 'Visualization & Reporting','Exploratory Analysis']
-
     },
-  
   ],
   socialMedia: [
     {
@@ -103,7 +100,7 @@ module.exports = {
     },
     {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/francis-mark-cayco-33511a190/',
+      url: 'https://www.linkedin.com/in/francis-mark-cayco/',
     },
     {
       name: 'Instagram',
