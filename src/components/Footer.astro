@@ -1,4 +1,5 @@
 ---
+import ExternalLink from './ExternalLink.astro';
 import Monogram from './Monogram.astro';
 
 interface Props {
@@ -21,14 +22,12 @@ const year = new Date().getFullYear();
       {
         social.map((s) => (
           <li>
-            <a class="ch-link ch-link--quiet" href={s.url} target="_blank" rel="noopener">
-              {s.name}
-            </a>
+            <ExternalLink class="ch-link ch-link--quiet" href={s.url} icon={false}>{s.name}</ExternalLink>
           </li>
         ))
       }
       <li><a class="ch-link ch-link--quiet" href={`mailto:${email}`}>Email</a></li>
-      <li><a class="ch-link ch-link--quiet" href={sourceUrl} target="_blank" rel="noopener">Source on GitHub</a></li>
+      <li><ExternalLink class="ch-link ch-link--quiet" href={sourceUrl} icon={false}>Source on GitHub</ExternalLink></li>
       <li><a class="ch-link ch-link--quiet" href="#top">Back to top</a></li>
     </ul>
   </div>

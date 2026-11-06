@@ -9,6 +9,8 @@ interface Props {
   icon?: boolean;
 }
 const { href, class: className = 'ch-link', hint = 'opens in a new tab', icon = true } = Astro.props;
+// Trim the slot so template line breaks never become an underlined space.
+const label = (await Astro.slots.render('default')).trim();
 ---
 
-<a class={className} href={href} target="_blank" rel="noopener"><slot />{icon && <Icon name="external" />}<span class="visually-hidden"> ({hint})</span></a>
+<a class={className} href={href} target="_blank" rel="noopener"><Fragment set:html={label} />{icon && <Icon name="external" />}<span class="visually-hidden"> ({hint})</span></a>

@@ -10,4 +10,4 @@ area: analytics
 showInProjects: true
 ---
 
-A data analysis presentation that examines travel behaviors based on different socioeconomic factors
+A data analysis presentation that examines travel behaviors based on different socioeconomic factors.

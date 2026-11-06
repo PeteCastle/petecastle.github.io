@@ -12,7 +12,10 @@ const isFeatured = item.kind === 'featured';
 const github = d.github;
 const youtube = item.kind === 'project' ? item.entry.data.youtube : undefined;
 const note = item.kind === 'project' ? item.entry.data.note : undefined;
-const tech = item.kind === 'featured' ? [item.entry.data.tag, ...item.entry.data.tech] : d.tech;
+const tech =
+  item.kind === 'featured' && !item.entry.data.tech.includes(item.entry.data.tag)
+    ? [item.entry.data.tag, ...item.entry.data.tech]
+    : d.tech;
 const Content = item.kind === 'project' ? (await render(item.entry)).Content : null;
 ---
 

@@ -19,12 +19,13 @@
   }
 }
 
-.section { padding-block: 64px; scroll-margin-top: 80px; }
+.section { padding-block: 64px; }
 .section--alt { background: var(--surface-1); }
 .section > .shell > .ch-heading { margin-bottom: 48px; }
 .g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 32px; }
 .icon { width: 16px; height: 16px; }
-.skip { position: absolute; left: 16px; top: -60px; z-index: 40; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 40; --_bg: var(--surface-1); --_edge: var(--ink); }
+.skip:hover { --_bg: var(--surface-2); }
 .skip:focus { top: 16px; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
@@ -304,7 +305,7 @@
 
 /* ---------- Rich text from markdown ---------- */
 .rich--lg p { font-size: 18px; line-height: 28px; letter-spacing: 0.01em; max-width: 720px; }
-.rich--lg p + p { margin-top: 24px; }
+.rich--lg p + p { margin-top: 0; } /* the About grid gap spaces them */
 
 /* ---------- Theme switch repaint: no colour transitions mid-swap ---------- */
 .theme-switching *,
@@ -315,7 +316,9 @@
    The theme switch cannot work, so it is not shown; below 1280 the nav links
    stay in the bar (wrapping) instead of behind the Menu button. */
 html:not(.js) .theme-switch,
-html:not(.js) .menu-btn { display: none; }
+html:not(.js) .menu-btn,
+html:not(.js) .showing,
+html:not(.js) [data-group-count] { display: none; }
 @media (max-width: 1279px) {
   html:not(.js) .ch-nav { flex-wrap: wrap; height: auto; padding-block: 16px; row-gap: 8px; }
   html:not(.js) .ch-nav__links { display: flex; flex-wrap: wrap; height: auto; margin-left: 0; gap: 8px 24px; width: 100%; }

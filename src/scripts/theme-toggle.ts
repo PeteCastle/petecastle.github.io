@@ -24,7 +24,18 @@ function apply(theme: Theme, persist: boolean) {
   requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')));
 }
 
+function stored(): Theme {
+  try {
+    return localStorage.getItem('theme') === 'day' ? 'day' : 'night';
+  } catch {
+    return root.getAttribute('data-theme') === 'day' ? 'day' : 'night';
+  }
+}
+
 apply(root.getAttribute('data-theme') === 'day' ? 'day' : 'night', false);
 sw?.addEventListener('change', () => apply(sw.checked ? 'day' : 'night', true));
+// Back/forward: the browser may restore an old switch state or a cached page;
+// re-sync both with the stored choice.
+addEventListener('pageshow', () => apply(stored(), false));
 
 export {};

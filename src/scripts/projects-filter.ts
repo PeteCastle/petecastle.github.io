@@ -19,9 +19,19 @@ function update() {
   }
 }
 
+function hashValue() {
+  try {
+    return decodeURIComponent(location.hash.slice(1));
+  } catch {
+    return '';
+  }
+}
+
+/** An area hash selects that area; no hash selects All; any other fragment
+    (#top, #main from the skip link) leaves the current selection alone. */
 function fromHash() {
-  const value = decodeURIComponent(location.hash.slice(1));
-  const match = radios.find((r) => r.value === value) ?? radios.find((r) => r.value === 'all');
+  const value = hashValue();
+  const match = value === '' ? radios.find((r) => r.value === 'all') : radios.find((r) => r.value === value);
   if (match) match.checked = true;
 }
 

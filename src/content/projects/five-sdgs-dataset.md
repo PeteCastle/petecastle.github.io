@@ -10,4 +10,4 @@ area: de
 showInProjects: true
 ---
 
-A comprehensive '5-SDGs Dataset' by aggregating, transforming, and loading data from OpenSTAT - a public dataset serviced under the Philippine Statistics authority.
+A comprehensive '5-SDGs Dataset' built by aggregating, transforming and loading data from OpenSTAT, a public dataset serviced under the Philippine Statistics Authority.

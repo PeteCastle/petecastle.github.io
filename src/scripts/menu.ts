@@ -12,7 +12,10 @@ if (menu && button && typeof menu.showModal === 'function') {
   menu.addEventListener('close', () => button.setAttribute('aria-expanded', 'false'));
   // A click on the backdrop (the dialog element itself, outside its content) closes it.
   menu.addEventListener('click', (event) => {
-    if (event.target === menu) menu.close();
+    if (event.target !== menu) return;
+    const r = menu.getBoundingClientRect();
+    const outside = event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom;
+    if (outside) menu.close();
   });
   // Same-page links: close first, then let the browser follow the anchor.
   menu.querySelectorAll('a[href^="/#"], a[href="/projects/"]').forEach((a) => a.addEventListener('click', () => menu.close()));

@@ -9,4 +9,4 @@ area: software
 showInProjects: true
 ---
 
-POS Program for a hypothetical restaurant chain called "McDollibee". Written using C++ and Qt Creator. 
+POS program for a hypothetical restaurant chain called "McDollibee". Written using C++ and Qt Creator.

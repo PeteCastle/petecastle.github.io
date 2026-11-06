@@ -12,4 +12,4 @@ area: ml
 showInProjects: true
 ---
 
-This study analyzes tumor characteristics in 197 cancer patients, reducing over 400 features to less than 20 using Principal Component Analysis. Five models (Logistic Regression, Random Forest, Gradient Boost, Support Vector, KNeighbors) are employed and compared.
+This study analyzes tumor characteristics in 197 cancer patients, reducing over 400 features to fewer than 20 using Principal Component Analysis. Five models (Logistic Regression, Random Forest, Gradient Boost, Support Vector, KNeighbors) are employed and compared.

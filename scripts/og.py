@@ -17,6 +17,9 @@ from PIL import Image, ImageDraw, ImageFont
 FONT_DIR = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("fonts")
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("public/og_image.png")
 
+if not (FONT_DIR / "BigShouldersDisplay[wght].ttf").exists():
+    raise SystemExit(f"fonts not found in {FONT_DIR}\nusage: python3 scripts/og.py <dir with the google/fonts TTFs> [out.png]")
+
 W, H = 1200, 630
 NIGHT = (20, 20, 20)
 WHITE = (255, 255, 255)

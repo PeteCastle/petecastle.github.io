@@ -9,4 +9,4 @@ area: cv
 showInProjects: true
 ---
 
-Matlab and Python implementation of several image segmentation algorithms (point, line, edge, Hough Transform, Thresholding, Region-Based, and Watershed)
+MATLAB and Python implementation of several image segmentation algorithms (point, line, edge, Hough Transform, Thresholding, Region-Based, and Watershed).

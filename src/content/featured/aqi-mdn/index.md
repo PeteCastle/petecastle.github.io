@@ -3,7 +3,7 @@ order: 1
 title: 'Probabilistic Air Pollution Forecasting Using Mixture Density Networks'
 date: 2025-06-04
 cover: './mixture_evolution.png'
-coverAlt: 'Chart of the mixture components evolving over training in the GRU-MDN model'
+coverAlt: 'Predicted mixture distributions for CO and NO at 5 AM: the individual mixture components and their sum'
 tag: 'Probabilistic Modelling'
 area: ml
 tech:

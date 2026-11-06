@@ -17,6 +17,8 @@ SRC = Path(sys.argv[1] if len(sys.argv) > 1 else "static/petecastle_frontpage.pn
 OUT = Path(sys.argv[2] if len(sys.argv) > 2 else "src/assets/photos/headshot-square.jpg")
 BOX = (148, 148, 852, 852)  # inscribed square of the 1000px circle
 
+if not SRC.exists():
+    raise SystemExit(f"source not found: {SRC}\nusage: python3 scripts/headshot.py <1000x1000 source.png> [out.jpg]")
 img = Image.open(SRC).convert("RGB")
 if img.size != (1000, 1000):
     raise SystemExit(f"expected a 1000x1000 source, got {img.size}")

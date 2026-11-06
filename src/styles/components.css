@@ -260,7 +260,6 @@
 .ch-stat__delta { font-size: 14px; line-height: 22px; color: var(--ink-2); }
 @media (max-width: 767px) {
   .ch-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
-  .ch-stat__value { font-size: 40px; line-height: 1; }
 }
 
 /* ---------- Dialog ---------- */
@@ -280,6 +279,9 @@
   margin: auto;
 }
 .ch-dialog:not([open]) { display: none; }
+/* The cut rule sets position: relative, which would make a modal dialog
+   absolute (it would scroll away from its fixed backdrop). */
+.ch-dialog:modal { position: fixed; }
 .ch-dialog::backdrop { background: rgba(20, 20, 20, 0.8); }
 .ch-dialog--wipe[open] { animation: ch-wipe var(--ch-dur-3) var(--ch-ease-emphasized); }
 @keyframes ch-wipe {
