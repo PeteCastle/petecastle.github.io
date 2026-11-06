@@ -1,0 +1,12 @@
+name: 'Data Scientist Professional'
+issuer: 'DataCamp'
+date: 2022-08-26
+image: './datacamp-data-scientist-professional.jpg'
+imageAlt: 'DataCamp Data Scientist Professional certificate, DS0012206974560'
+credentialUrl: 'https://www.datacamp.com/certificate/DS0012206974560'
+skills:
+  - 'Data Management'
+  - 'Model Development'
+  - 'Statistical Experimentation'
+  - 'Exploratory Analysis'
+  - 'Communication and Reporting'
