@@ -1,0 +1,20 @@
+---
+/** Eyebrow (with the crimson rule), title and optional lead. */
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  level?: 1 | 2;
+  titleClass?: string;
+  id?: string;
+  class?: string;
+}
+const { eyebrow, title, lead, level = 2, titleClass = 'display-2', id, class: className } = Astro.props;
+const Tag = level === 1 ? 'h1' : 'h2';
+---
+
+<div class:list={['ch-heading', className]}>
+  <p class="ch-heading__eyebrow">{eyebrow}</p>
+  <Tag class:list={[titleClass, 'ch-heading__title']} id={id}>{title}</Tag>
+  {lead && <p class="ch-heading__lead">{lead}</p>}
+</div>

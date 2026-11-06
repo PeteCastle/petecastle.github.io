@@ -1,0 +1,59 @@
+---
+import { render } from 'astro:content';
+import { AREAS, type CatalogueItem } from '../lib/data';
+import ExternalLink from './ExternalLink.astro';
+
+interface Props {
+  item: CatalogueItem;
+}
+const { item } = Astro.props;
+const d = item.entry.data;
+const isFeatured = item.kind === 'featured';
+const github = d.github;
+const youtube = item.kind === 'project' ? item.entry.data.youtube : undefined;
+const note = item.kind === 'project' ? item.entry.data.note : undefined;
+const tech =
+  item.kind === 'featured' && !item.entry.data.tech.includes(item.entry.data.tag)
+    ? [item.entry.data.tag, ...item.entry.data.tech]
+    : d.tech;
+const Content = item.kind === 'project' ? (await render(item.entry)).Content : null;
+---
+
+<article class="ch-card ch-card--outline ch-card--hover project" data-area={d.area}>
+  <h3 class="subtitle">
+    {
+      github ? (
+        <ExternalLink href={github} icon={false}>
+          {d.title}
+        </ExternalLink>
+      ) : (
+        d.title
+      )
+    }
+  </h3>
+  {note && <p class="caption">{note}</p>}
+  <div class="tags">
+    <span class="ch-tag">{AREAS[d.area]}</span>
+    {isFeatured && <span class="ch-tag">Featured</span>}
+  </div>
+  <div class="rich body-sm card__desc">
+    {item.kind === 'featured' ? <p>{item.entry.data.summary}</p> : Content && <Content />}
+  </div>
+  <p class="caption">{tech.join(' · ')}</p>
+  {
+    (github || youtube) && (
+      <p class="project__links body-sm">
+        {github && (
+          <ExternalLink class="ch-link ch-link--quiet" href={github}>
+            View on GitHub
+          </ExternalLink>
+        )}
+        {youtube && (
+          <ExternalLink class="ch-link ch-link--quiet" href={youtube}>
+            Watch on YouTube
+          </ExternalLink>
+        )}
+      </p>
+    )
+  }
+</article>

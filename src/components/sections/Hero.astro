@@ -1,0 +1,86 @@
+---
+/** Hero B, "white sheet on a black wall": the name in type alone on a chamfered
+    surface-inverse sheet, one crimson button, then the proof figures. */
+import { publicUrl } from '../../lib/site';
+import Icon from '../Icon.astro';
+
+interface Props {
+  name: string;
+  roles: string[];
+  lead: string;
+  location: string;
+  resume: string;
+  counts: {
+    projects: number;
+    featured: number;
+    firstYear: number;
+    lastYear: number;
+    roles: number;
+    current: number;
+    rolesSince: number;
+    automatedTests: string | null;
+    capstoneMape: { value: string; baseline: string } | null;
+  };
+  capstoneYear?: number;
+}
+const { name, roles, lead, location, resume, counts, capstoneYear } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-name">
+  <div class="shell">
+    <div class="hero__sheet">
+      <div class="ch-heading"><p class="ch-heading__eyebrow">{location} // {counts.projects} projects</p></div>
+      <h1 class="display-1 hero__name" id="hero-name">{name}</h1>
+      <p class="hero__role">
+        {
+          roles.map((role, i) => (
+            <Fragment>
+              {i > 0 && <span class="sep"> · </span>}
+              <span class="role">{role}</span>
+            </Fragment>
+          ))
+        }
+      </p>
+      <p class="lead hero__lead">{lead}</p>
+      <div class="hero__cta">
+        <a class="ch-btn ch-btn--primary ch-btn--lg ch-btn--skew" href="#work"><span>View the work</span></a>
+        <a class="ch-btn ch-btn--lg" href={publicUrl(resume)} target="_blank" rel="noopener">
+          Download the résumé <Icon name="external" /><span class="visually-hidden"> (PDF, opens in a new tab)</span>
+        </a>
+      </div>
+    </div>
+
+    <dl class="ch-stats strip" aria-label="In numbers">
+      <div class="ch-stat">
+        <dt class="ch-stat__label">Projects</dt>
+        <dd class="ch-stat__value">{counts.projects}</dd>
+        <dd class="ch-stat__delta">{counts.firstYear} to {counts.lastYear}, {counts.featured} featured</dd>
+      </div>
+      <div class="ch-stat">
+        <dt class="ch-stat__label">Roles</dt>
+        <dd class="ch-stat__value">{counts.roles}</dd>
+        <dd class="ch-stat__delta">{counts.current} current, since {counts.rolesSince}</dd>
+      </div>
+      {
+        counts.automatedTests && (
+          <div class="ch-stat">
+            <dt class="ch-stat__label">Automated tests</dt>
+            <dd class="ch-stat__value">{counts.automatedTests}</dd>
+            <dd class="ch-stat__delta">Growthzacks analytics platform</dd>
+          </div>
+        )
+      }
+      {
+        counts.capstoneMape && (
+          <div class="ch-stat">
+            <dt class="ch-stat__label">Capstone MAPE</dt>
+            <dd class="ch-stat__value">{counts.capstoneMape.value}</dd>
+            <dd class="ch-stat__delta">
+              from a {counts.capstoneMape.baseline} baseline{capstoneYear ? `, AIM ${capstoneYear}` : ''}
+            </dd>
+          </div>
+        )
+      }
+    </dl>
+  </div>
+</section>

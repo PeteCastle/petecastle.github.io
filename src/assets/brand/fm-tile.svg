@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <title>FM Cayco</title>
+  <polygon points="0,0 32,0 48,16 48,48 16,48 0,32" fill="#cc0033"/>
+  <g fill="#ffffff" transform="translate(6.000 5.714) scale(0.28571)">
+    <path d="M8 8H48L56 16V28H32V46H42V66H32V92H16L8 84Z"/>
+    <path d="M50 36H74V120H58L50 112Z M94 36H110L118 44V120H94Z M54 36H74L84 64L94 36H114L94 92H74Z"/>
+  </g>
+</svg>

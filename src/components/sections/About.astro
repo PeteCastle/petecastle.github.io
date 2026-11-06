@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import headshot from '../../assets/photos/headshot-square.jpg';
+import { pad2 } from '../../lib/data';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  profile: CollectionEntry<'profile'>;
+  index: number;
+}
+const { profile, index } = Astro.props;
+const { Content } = await render(profile);
+const p = profile.data;
+---
+
+<section class="section section--alt" id="about" aria-labelledby="about-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="about-title"
+      eyebrow={`About // ${pad2(index)}`}
+      title={`About ${p.nickname}`}
+      lead={`Full-lifecycle, from scoping to teach-back; based in ${p.location}.`}
+    />
+    <div class="g12">
+      <div class="about__prose rich rich--lg reveal">
+        <Content />
+      </div>
+      <figure class="about__figure reveal">
+        <div class="photo">
+          <Image
+            src={headshot}
+            alt={`${p.name} in a black suit against a wood-slat wall`}
+            width={640}
+            widths={[320, 640]}
+            sizes="(max-width: 767px) 160px, (max-width: 1279px) 33vw, 320px"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="caption">{p.name} ({p.nickname}), {p.location}</figcaption>
+      </figure>
+      <div class="about__lists reveal">
+        <div class="interests">
+          <h3 class="label">Interests</h3>
+          <ul>{p.interests.map((i) => <li>{i}</li>)}</ul>
+        </div>
+        <div class="languages">
+          <h3 class="label">Languages</h3>
+          <ul>{p.languages.map((l) => <li>{l}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

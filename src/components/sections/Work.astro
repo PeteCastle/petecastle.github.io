@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import { render, type CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import { words } from '../../lib/words';
+import ExternalLink from '../ExternalLink.astro';
+import Icon from '../Icon.astro';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  featured: CollectionEntry<'featured'>[];
+  total: number;
+  index: number;
+}
+const { featured, total, index } = Astro.props;
+const cards = await Promise.all(featured.map(async (entry) => ({ entry, Content: (await render(entry)).Content })));
+---
+
+<section class="section section--alt" id="work" aria-labelledby="work-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="work-title"
+      eyebrow={`Projects // ${pad2(index)} · ${featured.length} of ${total}`}
+      title="Selected work"
+      lead={`${words(featured.length, true)} projects that show the range: probabilistic forecasting, text mining and computer vision.`}
+    />
+    <div class="cards">
+      {
+        cards.map(({ entry, Content }, i) => (
+          <article
+            class:list={['ch-card ch-card--outline ch-card--hover card reveal', { 'ch-card--stripe': i === 0 }]}
+            style={`--reveal-step: ${i}`}
+          >
+            <div class="cover">
+              <Image
+                src={entry.data.cover}
+                alt={entry.data.coverAlt}
+                width={Math.min(960, entry.data.cover.width)}
+                widths={[480, Math.min(960, entry.data.cover.width)]}
+                sizes="(max-width: 767px) calc(100vw - 80px), (max-width: 1279px) 38vw, 420px"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="card__body">
+              <div class="tags">
+                <span class="ch-tag">{entry.data.tag}</span>
+                {entry.data.award && <span class="ch-tag">{entry.data.award}</span>}
+              </div>
+              <h3 class="subtitle">
+                <ExternalLink href={entry.data.github} icon={false}>
+                  {entry.data.title}
+                </ExternalLink>
+              </h3>
+              <div class="rich body-sm card__desc">
+                <Content />
+              </div>
+              <p class="caption">{entry.data.tech.join(' · ')}</p>
+              <p class="body-sm">
+                <ExternalLink class="ch-link ch-link--quiet" href={entry.data.github}>
+                  View on GitHub
+                </ExternalLink>
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <div class="section__foot">
+      <a class="ch-btn" href="/projects/">View all {total} projects <Icon name="arrow-right" /></a>
+    </div>
+  </div>
+</section>

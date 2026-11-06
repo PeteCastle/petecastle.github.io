@@ -1,0 +1,64 @@
+/* Single stylesheet import for the site. Layer order first, so the design
+   system's own rules beat Tailwind's base and lose to its utilities. */
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme); /* no Preflight on purpose */
+@import "./tokens.css";                         /* unlayered: the tokens */
+@import "./properties.css";                     /* unlayered: @property */
+@import "./base.css" layer(base);
+@import "./components.css" layer(components);
+@import "./layout.css" layer(components);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+
+/* Utilities are generated only from class names in the templates, never from
+   words in the content (which produced stray utilities such as .container). */
+@source "../components";
+@source "../layouts";
+@source "../pages";
+
+/* Tailwind: drop the stock palette, radii, shadows, blurs, fonts and
+   animations so nothing off-system can be reached from a class name; expose
+   the system's tokens under the usual utility names instead. */
+@theme {
+  --color-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --radius-*: initial;
+  --font-*: initial;
+  --blur-*: initial;
+  --animate-*: initial;
+  --spacing: 0.25rem;
+  --breakpoint-*: initial;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1440px;
+}
+
+@theme inline {
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-deep: var(--surface-deep);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-on-deep: var(--on-deep);
+  --color-on-signal: var(--on-signal);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-solid: var(--line-solid);
+  --color-signal: var(--signal);
+  --color-signal-text: var(--signal-text);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-ok: var(--ok);
+  --font-display: var(--font-display);
+  --font-text: var(--font-text);
+  --font-mono: var(--font-mono);
+}
+
+@custom-variant day (&:where([data-theme="day"], [data-theme="day"] *));

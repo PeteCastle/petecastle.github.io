@@ -1,0 +1,78 @@
+---
+import { getImage } from 'astro:assets';
+import About from '../components/sections/About.astro';
+import Contact from '../components/sections/Contact.astro';
+import Credentials from '../components/sections/Credentials.astro';
+import Experience from '../components/sections/Experience.astro';
+import Hero from '../components/sections/Hero.astro';
+import QuoteBand from '../components/sections/QuoteBand.astro';
+import Skills from '../components/sections/Skills.astro';
+import Work from '../components/sections/Work.astro';
+import headshot from '../assets/photos/headshot-square.jpg';
+import Base from '../layouts/Base.astro';
+import {
+  getCatalogue,
+  getCertifications,
+  getCounts,
+  getEducation,
+  getFeatured,
+  getJobs,
+  getProfile,
+  getSkills,
+} from '../lib/data';
+import { SITE_URL, absolute } from '../lib/site';
+
+const [profile, jobs, featured, skills, certifications, education, counts, catalogue] = await Promise.all([
+  getProfile(),
+  getJobs(),
+  getFeatured(),
+  getSkills(),
+  getCertifications(),
+  getEducation(),
+  getCounts(),
+  getCatalogue(),
+]);
+const p = profile.data;
+const capstone = catalogue.items.find((i) => i.entry.id === 'milk-sachet-price-optimization');
+const photo = await getImage({ src: headshot, width: 640, format: 'jpg' });
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: p.name,
+  alternateName: p.nickname,
+  url: `${SITE_URL}/`,
+  image: absolute(photo.src),
+  description: p.seo.description,
+  jobTitle: p.roles,
+  worksFor: jobs
+    .filter((j) => j.data.end === null)
+    .map((j) => ({ '@type': 'Organization', name: j.data.company, url: j.data.url })),
+  alumniOf: education
+    .filter((e) => e.data.degree.startsWith('MS') || e.data.degree.startsWith('BS'))
+    .map((e) => ({ '@type': 'CollegeOrUniversity', name: e.data.school })),
+  address: { '@type': 'PostalAddress', addressLocality: 'Makati', addressCountry: 'PH' },
+  email: `mailto:${p.email}`,
+  knowsAbout: p.interests,
+  sameAs: p.social.map((s) => s.url),
+};
+---
+
+<Base path="/" jsonLd={[person]}>
+  <Hero
+    name={p.name}
+    roles={p.roles}
+    lead={p.lead}
+    location={p.location}
+    resume={p.resume}
+    counts={counts}
+    capstoneYear={capstone?.entry.data.date.getUTCFullYear()}
+  />
+  <Work featured={featured} total={counts.projects} index={1} />
+  <Experience jobs={jobs} index={2} />
+  <QuoteBand label={p.quote.label} text={p.quote.text} caption={p.quote.caption} />
+  <About profile={profile} index={3} />
+  <Skills skills={skills} index={4} />
+  <Credentials education={education} certifications={certifications} index={5} />
+  <Contact profile={profile} index={6} />
+</Base>

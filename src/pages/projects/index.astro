@@ -1,0 +1,99 @@
+---
+import Icon from '../../components/Icon.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Base from '../../layouts/Base.astro';
+import { AREA_ORDER, AREAS, getCatalogue, getProfile } from '../../lib/data';
+import { SITE_URL } from '../../lib/site';
+import { plural } from '../../lib/words';
+
+const [{ items, byYear, byArea, total }, profile] = await Promise.all([getCatalogue(), getProfile()]);
+const p = profile.data;
+const firstYear = Math.min(...byYear.map((g) => g.year));
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `All ${total} projects by ${p.name}`,
+  numberOfItems: total,
+  itemListElement: items.map((item, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'CreativeWork',
+      name: item.entry.data.title,
+      dateCreated: item.entry.data.date.toISOString().slice(0, 10),
+      ...(item.entry.data.github ? { url: item.entry.data.github } : {}),
+      author: { '@type': 'Person', name: p.name, url: `${SITE_URL}/` },
+    },
+  })),
+};
+---
+
+<Base
+  path="/projects/"
+  current="projects"
+  title={`All ${total} projects: ${p.name}`}
+  description={`Every project by ${p.name} since ${firstYear}, newest first: machine learning, data engineering, analytics, computer vision, NLP and software.`}
+  jsonLd={[itemList]}
+>
+  <div class="shell filterable">
+    <div class="pheader">
+      <SectionHeading
+        level={1}
+        eyebrow={`Index // ${total} projects`}
+        title={`All ${total} projects`}
+        lead={`Every project since ${firstYear}, newest first; filter by area.`}
+      />
+    </div>
+
+    <fieldset class="facets">
+      <legend class="visually-hidden">Filter by area</legend>
+      <div class="ch-tabs ch-tabs--skew">
+        <label class="ch-tab">
+          <input type="radio" name="area" id="area-all" value="all" checked />
+          All <span class="ch-tab__count">{total}</span>
+        </label>
+        {
+          AREA_ORDER.filter((a) => byArea[a] > 0).map((a) => (
+            <label class="ch-tab">
+              <input type="radio" name="area" id={`area-${a}`} value={a} />
+              {AREAS[a]} <span class="ch-tab__count">{byArea[a]}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+    <p class="caption showing" id="showing" aria-live="polite">Showing {total} of {total}</p>
+
+    <div class="catalogue" id="catalogue">
+      {
+        byYear.map((group) => (
+          <section class="pgroup" aria-labelledby={`y${group.year}`}>
+            <div class="pgroup__head">
+              <h2 class="display-3" id={`y${group.year}`}>
+                {group.year}
+              </h2>
+              <p class="caption" data-group-count>
+                {group.items.length} {plural(group.items.length, 'project')}
+              </p>
+            </div>
+            <div class="pgroup__cards">
+              {group.items.map((item) => (
+                <ProjectCard item={item} />
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="pfoot">
+      <a class="ch-btn" href="/"><Icon name="arrow-left" /> Back to the front page</a>
+    </div>
+  </div>
+
+  <script>
+    import '../../scripts/projects-filter';
+  </script>
+</Base>

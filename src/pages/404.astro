@@ -1,0 +1,17 @@
+---
+import SectionHeading from '../components/SectionHeading.astro';
+import Base from '../layouts/Base.astro';
+import { getProfile } from '../lib/data';
+
+const profile = await getProfile();
+---
+
+<Base path="/404/" title={`Not found: ${profile.data.name}`} noindex>
+  <div class="shell">
+    <div class="nf">
+      <SectionHeading level={1} eyebrow="Error // 404" title="Not found" titleClass="display-4" />
+      <p>There is nothing at this address.</p>
+      <a class="ch-btn ch-btn--primary" href="/">Go to the front page</a>
+    </div>
+  </div>
+</Base>

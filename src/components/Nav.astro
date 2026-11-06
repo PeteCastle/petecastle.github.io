@@ -1,0 +1,41 @@
+---
+import { NAV, publicUrl, type NavKey } from '../lib/site';
+import Icon from './Icon.astro';
+import Monogram from './Monogram.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  current?: NavKey;
+  brand: string;
+  resume: string;
+}
+const { current, brand, resume } = Astro.props;
+---
+
+<header class="site-nav" id="top">
+  <div class="shell">
+    <nav class="ch-nav" aria-label="Site">
+      <a class="lockup" href="/"><Monogram /><span>{brand}</span></a>
+      <ul class="ch-nav__links">
+        {
+          NAV.map((link) => (
+            <li>
+              <a class="ch-nav__link" href={link.href} aria-current={current === link.key ? 'page' : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="nav-tools">
+        <a class="ch-btn ch-btn--sm resume" href={publicUrl(resume)} target="_blank" rel="noopener">
+          Download the résumé <Icon name="external" /><span class="visually-hidden"> (PDF, opens in a new tab)</span>
+        </a>
+        <ThemeToggle />
+        <button type="button" class="ch-btn ch-btn--sm menu-btn" id="menu-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">
+          <Icon name="menu" /> Menu
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>

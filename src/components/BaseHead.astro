@@ -1,0 +1,58 @@
+---
+import { Font } from 'astro:assets';
+import { absolute } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  ogImage: string;
+  ogAlt: string;
+  twitter: string;
+  verification: string;
+  jsonLd?: unknown[];
+}
+
+const { title, description, path, noindex = false, ogImage, ogAlt, twitter, verification, jsonLd = [] } = Astro.props;
+const canonical = absolute(path);
+const image = absolute(ogImage);
+/** JSON for a <script> body: no way to close the tag early. */
+const ld = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+<meta name="google-site-verification" content={verification} />
+
+<Font cssVariable="--ff-display" preload={[{ weight: '800', style: 'normal' }]} />
+<Font cssVariable="--ff-text" preload={[{ weight: '400', style: 'normal' }]} />
+<Font cssVariable="--ff-mono" />
+
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Francis Mark Cayco" />
+<meta property="og:locale" content="en_PH" />
+{!noindex && <meta property="og:url" content={canonical} />}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={twitter} />
+<meta name="twitter:creator" content={twitter} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={ogAlt} />
+
+{jsonLd.map((data) => <script type="application/ld+json" set:html={ld(data)} />)}

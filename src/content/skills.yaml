@@ -1,0 +1,92 @@
+# Tools by category, in display order. Counts on the site are computed from these lists.
+- id: languages
+  order: 1
+  name: 'Programming Languages'
+  tools:
+    - 'Python'
+    - 'JavaScript'
+    - 'TypeScript'
+    - 'Java'
+    - 'C++'
+    - 'SQL'
+    - 'Bash'
+- id: analysis
+  order: 2
+  name: 'Data Analysis & Visualization'
+  tools:
+    - 'Pandas'
+    - 'NumPy'
+    - 'Polars'
+    - 'Matplotlib'
+    - 'Jupyter'
+    - 'Power BI'
+    - 'Tableau'
+    - 'Microsoft Excel'
+- id: ml
+  order: 3
+  name: 'Machine Learning & Explainable AI'
+  tools:
+    - 'scikit-learn'
+    - 'PyTorch'
+    - 'TensorFlow'
+    - 'XGBoost'
+    - 'Optuna'
+    - 'NetworkX'
+    - 'SHAP'
+    - 'LIME'
+- id: data-engineering
+  order: 4
+  name: 'Data Engineering & Orchestration'
+  tools:
+    - 'Apache Spark'
+    - 'Prefect'
+    - 'Dagster'
+    - 'Airflow'
+    - 'dbt'
+    - 'Airbyte'
+    - 'Databricks'
+    - 'Azure Data Factory'
+    - 'PostgreSQL'
+- id: cloud
+  order: 5
+  name: 'Cloud & Infrastructure'
+  tools:
+    - 'AWS'
+    - 'Amazon S3'
+    - 'Azure'
+    - 'Azure Blob Storage'
+    - 'GCP'
+    - 'DigitalOcean'
+    - 'Linux'
+    - 'Nginx'
+    - 'Terraform'
+- id: mlops
+  order: 6
+  name: 'MLOps, CI/CD & Testing'
+  tools:
+    - 'Docker'
+    - 'MLflow'
+    - 'Git'
+    - 'GitHub'
+    - 'Pytest'
+    - 'Postman'
+- id: web
+  order: 7
+  name: 'Web Development & APIs'
+  tools:
+    - 'Django'
+    - 'Django REST Framework'
+    - 'Flask'
+    - 'FastAPI'
+    - 'REST APIs'
+    - 'HTMX'
+    - 'Node.js'
+    - 'HTML'
+    - 'CSS'
+- id: design
+  order: 8
+  name: 'Design & Productivity'
+  tools:
+    - 'Figma'
+    - 'Canva'
+    - 'Microsoft Word'

@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import { words } from '../../lib/words';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  skills: CollectionEntry<'skills'>[];
+  index: number;
+}
+const { skills, index } = Astro.props;
+const total = skills.reduce((n, s) => n + s.data.tools.length, 0);
+---
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="skills-title"
+      eyebrow={`Skills // ${pad2(index)} · ${total} tools`}
+      title="Tools, by category"
+      lead={`${total} tools in ${words(skills.length)} categories, from languages and analysis to orchestration, cloud and MLOps.`}
+    />
+    <div class="ch-cut skills-wrap reveal">
+      <table class="ch-table">
+        <caption class="visually-hidden">Tools by category, with the number of tools in each</caption>
+        <thead>
+          <tr><th scope="col">Category</th><th scope="col">Tools</th><th scope="col" class="ch-num">Count</th></tr>
+        </thead>
+        <tbody>
+          {
+            skills.map((s) => (
+              <tr>
+                <th scope="row" class="cat">{s.data.name}</th>
+                <td class="tools">{s.data.tools.join(' · ')}</td>
+                <td class="ch-num">{s.data.tools.length}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

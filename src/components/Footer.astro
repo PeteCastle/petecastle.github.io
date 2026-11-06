@@ -1,0 +1,34 @@
+---
+import ExternalLink from './ExternalLink.astro';
+import Monogram from './Monogram.astro';
+
+interface Props {
+  name: string;
+  brand: string;
+  location: string;
+  email: string;
+  social: { name: string; url: string }[];
+  sourceUrl: string;
+}
+const { name, brand, location, email, social, sourceUrl } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="shell footer__row">
+    <a class="lockup" href="/"><Monogram /><span>{brand}</span></a>
+    <p class="caption">© {year} {name} · {location}</p>
+    <ul class="footer__links">
+      {
+        social.map((s) => (
+          <li>
+            <ExternalLink class="ch-link ch-link--quiet" href={s.url} icon={false}>{s.name}</ExternalLink>
+          </li>
+        ))
+      }
+      <li><a class="ch-link ch-link--quiet" href={`mailto:${email}`}>Email</a></li>
+      <li><ExternalLink class="ch-link ch-link--quiet" href={sourceUrl} icon={false}>Source on GitHub</ExternalLink></li>
+      <li><a class="ch-link ch-link--quiet" href="#top">Back to top</a></li>
+    </ul>
+  </div>
+</footer>

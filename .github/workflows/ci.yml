@@ -1,0 +1,30 @@
+name: Build check
+
+on:
+  pull_request:
+    branches: [source]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Check and build
+        run: npm run build
+      - name: Fail on third-party font requests
+        run: |
+          if grep -rEl "fonts\.googleapis\.com|fonts\.gstatic\.com" dist; then
+            echo "The build references Google Fonts; fonts must be self-hosted." >&2
+            exit 1
+          fi
