@@ -1,49 +1,71 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal Starter
-</h1>
+# franciscayco.com
 
-## 🚀 Quick start
+Francis Mark Cayco's portfolio, built with [Astro](https://astro.build) and Tailwind CSS on
+**Kiko's Design System** (cut corners, one crimson signal, one gold accent, Night and Day themes),
+deployed to GitHub Pages by GitHub Actions.
 
-1.  **Create a Gatsby site.**
+## Develop
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+Requires Node 22.23.4 or newer (`.nvmrc`).
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+```bash
+nvm use
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # astro check + static build into dist/
+npm run preview   # serve dist/
+```
 
-2.  **Start developing.**
+## Edit the content
 
-    Navigate into your new site’s directory and start it up.
+Everything on the site is read from `src/content/` and every number shown (projects, roles,
+tools, per-area and per-year counts) is computed from it at build time.
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+| What | Where |
+|---|---|
+| Name, lead sentence, contact, social links, bio, SEO | `src/content/profile/main.md` |
+| Jobs (one file each, bullets in the body) | `src/content/jobs/*.md` |
+| Featured projects (cover image beside each) | `src/content/featured/*/index.md` |
+| All other projects | `src/content/projects/*.md` |
+| Tools by category | `src/content/skills.yaml` |
+| Certifications (scan beside each) | `src/content/certifications/*.yaml` |
+| Education | `src/content/education/*.yaml` |
 
-3.  **Open the code and start customizing!**
+Each project needs an `area` (`ml`, `de`, `software`, `analytics`, `cv` or `nlp`); it drives the
+filter on `/projects/`. The schemas live in `src/content.config.ts`, and `npm run build` fails on
+a missing or misspelled field.
 
-    Your site is now running at http://localhost:8000!
+The résumé is `public/Francis Mark Cayco - Resume Latest.pdf`; replace the file and keep the name.
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+## Design system
 
-4.  **Learn more**
+- `src/styles/tokens.css`: colour, type, spacing, chamfer and motion tokens for Night (default)
+  and Day.
+- `src/styles/components.css`: the `ch-*` components (button, link, card, tag, switch, table,
+  stats, dialog, tabs) and the type scale.
+- `src/styles/layout.css`: page layout and sections.
+- `src/styles/global.css`: layer order and the Tailwind setup. Tailwind's stock palette, radii,
+  shadows and blurs are removed, so utilities can only reach the system's own tokens.
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+## Assets
 
-## 🚀 Quick start (Netlify)
+```bash
+npm run sync-fonts                              # copy the 9 woff2 files from @fontsource
+npm run favicons                                # favicon set from src/assets/brand/fm-tile.svg
+python3 scripts/og.py <dir-with-ttf-fonts>      # public/og_image.png (1200x630)
+python3 scripts/headshot.py                     # one-time square crop of the headshot
+```
 
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
+Fonts are self-hosted through Astro's Fonts API; the built site makes no third-party requests.
 
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## Deploy
+
+Pushing to `source` runs `.github/workflows/deploy.yml`, which builds the site and publishes it
+to GitHub Pages. Pull requests into `source` run a build check (`.github/workflows/ci.yml`).
+
+One-time repository settings for the switch from the old Gatsby deploy:
+
+1. **Settings → Environments → github-pages → Deployment branches and tags**: add `source`.
+2. **Settings → Pages → Build and deployment → Source**: choose **GitHub Actions**.
+
+The custom domain (`www.franciscayco.com`) and HTTPS stay as configured in the Pages settings.
