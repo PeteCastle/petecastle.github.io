@@ -1,0 +1,54 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import { words } from '../../lib/words';
+import ExternalLink from '../ExternalLink.astro';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  jobs: CollectionEntry<'jobs'>[];
+  index: number;
+}
+const { jobs, index } = Astro.props;
+const rows = await Promise.all(jobs.map(async (job) => ({ job, Content: (await render(job)).Content })));
+const current = jobs.filter((j) => j.data.end === null).length;
+const earlier = jobs.length - current;
+---
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="experience-title"
+      eyebrow={`Experience // ${pad2(index)} · ${jobs.length} roles`}
+      title="Experience"
+      lead={`${words(current, true)} roles today, in corporate finance and e-commerce analytics, and the ${words(earlier)} that led there.`}
+    />
+    <div class="xp">
+      {
+        rows.map(({ job, Content }) => (
+          <article class="xp__row reveal">
+            <div class="xp__rec">
+              <h3 class="subtitle">{job.data.title}</h3>
+              <p>
+                <ExternalLink href={job.data.url}>{job.data.company}</ExternalLink>
+              </p>
+              <p class="caption">
+                {job.data.location} · {job.data.range}
+              </p>
+              {(job.data.end === null || job.data.type !== 'Professional') && (
+                <div class="tags">
+                  {job.data.end === null && <span class="ch-tag ch-tag--subtle ch-tag--ok">Current</span>}
+                  {job.data.type !== 'Professional' && <span class="ch-tag">{job.data.type}</span>}
+                </div>
+              )}
+            </div>
+            <div class="xp__list">
+              <Content />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

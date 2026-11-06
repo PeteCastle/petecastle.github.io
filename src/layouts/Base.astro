@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import MenuDialog from '../components/MenuDialog.astro';
+import Nav from '../components/Nav.astro';
+import SkipLink from '../components/SkipLink.astro';
+import { getProfile } from '../lib/data';
+import type { NavKey } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path: string;
+  current?: NavKey;
+  noindex?: boolean;
+  jsonLd?: unknown[];
+}
+
+const profile = await getProfile();
+const p = profile.data;
+const { title = p.seo.title, description = p.seo.description, path, current, noindex, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#141414" />
+    <script is:inline>
+      // Before first paint: mark JS as available and apply a stored theme.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'day' || t === 'night') {
+            d.setAttribute('data-theme', t);
+            var m = document.querySelector('meta[name="theme-color"]');
+            if (m) m.setAttribute('content', t === 'day' ? '#ffffff' : '#141414');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <BaseHead
+      title={title}
+      description={description}
+      path={path}
+      noindex={noindex}
+      ogImage={p.seo.ogImage}
+      ogAlt={`${p.name}: ${p.roles.join(' · ')}`}
+      twitter={p.seo.twitter}
+      verification={p.seo.googleSiteVerification}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body>
+    <SkipLink />
+    <Nav current={current} brand={p.brand} resume={p.resume} />
+    <MenuDialog resume={p.resume} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer name={p.name} brand={p.brand} location={p.location} email={p.email} social={p.social} sourceUrl={p.sourceUrl} />
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

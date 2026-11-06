@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import { publicUrl } from '../../lib/site';
+import ExternalLink from '../ExternalLink.astro';
+import Icon from '../Icon.astro';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  profile: CollectionEntry<'profile'>;
+  index: number;
+}
+const { profile, index } = Astro.props;
+const p = profile.data;
+---
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="contact-title"
+      eyebrow={`Contact // ${pad2(index)}`}
+      title="Get in touch"
+      lead="For roles, collaborations and questions about the work, email is fastest."
+    />
+    <div class="g12">
+      <div class="contact__main reveal">
+        <a class="ch-link contact__email" href={`mailto:${p.email}`}>{p.email}</a>
+        <a class="ch-link ch-link--quiet ch-num" href={`tel:${p.phone}`}>{p.phoneDisplay}</a>
+        <div class="contact__cta">
+          <a class="ch-btn ch-btn--primary" href={`mailto:${p.email}`}>Email {p.nickname}</a>
+          <a class="ch-btn" href={publicUrl(p.resume)} target="_blank" rel="noopener">
+            Download the résumé <Icon name="external" /><span class="visually-hidden"> (PDF, opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact__else reveal">
+        <h3 class="label">Elsewhere</h3>
+        <ul class="else">
+          {
+            p.social.map((s) => (
+              <li>
+                <ExternalLink href={s.url}>{s.name}</ExternalLink>
+                <span class="caption">{s.handle}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

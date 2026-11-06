@@ -1,0 +1,33 @@
+---
+import { NAV, publicUrl } from '../lib/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  resume: string;
+}
+const { resume } = Astro.props;
+---
+
+<dialog class="ch-dialog ch-dialog--wipe" id="menu" aria-label="Menu">
+  <ul class="menu__links">
+    {
+      NAV.map((link) => (
+        <li>
+          <a class="display-4" href={link.href}>
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="menu__foot">
+    <a class="ch-btn ch-btn--sm" href={publicUrl(resume)} target="_blank" rel="noopener">
+      Download the résumé <Icon name="external" /><span class="visually-hidden"> (PDF, opens in a new tab)</span>
+    </a>
+    <button type="button" class="ch-btn ch-btn--sm" id="menu-close"><Icon name="close" /> Close</button>
+  </div>
+</dialog>
+
+<script>
+  import '../scripts/menu';
+</script>

@@ -1,0 +1,12 @@
+---
+/** The FM monogram, drawn in the current colour. */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 126 128" aria-hidden="true" focusable="false" fill="currentColor">
+  <path d="M8 8H48L56 16V28H32V46H42V66H32V92H16L8 84Z"></path>
+  <path d="M50 36H74V120H58L50 112Z M94 36H110L118 44V120H94Z M54 36H74L84 64L94 36H114L94 92H74Z"></path>
+</svg>
