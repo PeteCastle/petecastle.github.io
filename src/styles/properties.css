@@ -1,0 +1,12 @@
+/* Registered custom properties used by the cut (chamfer) components so their
+   fill and edge colours can transition. Unlayered on purpose. */
+@property --_bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+@property --_edge {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}

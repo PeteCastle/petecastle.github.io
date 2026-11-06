@@ -1,0 +1,131 @@
+/* Base: a small reset (Tailwind's Preflight is not imported) and document defaults. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-0);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+main:focus {
+  outline: none;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--stroke-2) solid var(--focus);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reveal on scroll: only once the script has run (html.js), never under
+   reduced motion. The hero never waits. */
+html.js .reveal {
+  opacity: 0;
+  translate: 0 24px;
+  transition:
+    opacity var(--ch-dur-4) var(--ch-ease-standard),
+    translate var(--ch-dur-4) var(--ch-ease-standard);
+  transition-delay: calc(var(--reveal-step, 0) * 60ms);
+}
+
+html.js .reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    translate: 0 0;
+    transition-duration: var(--ch-dur-2);
+    transition-delay: 0ms;
+  }
+}
+
+/* Printing never waits for a scroll: everything is shown. */
+@media print {
+  html.js .reveal {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}

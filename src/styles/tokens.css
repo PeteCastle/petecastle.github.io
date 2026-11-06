@@ -1,0 +1,124 @@
+/* Kiko's Design System tokens (artifact TrrMF8viHN9FQUinfgL3qY). Night is the
+   fallback on :root; Day is opted into with [data-theme="day"] on <html>.
+   Attribute selectors (not html[...]) so any block can pin its own theme. */
+:root,
+[data-theme="night"] {
+  --surface-0: #141414;
+  --surface-1: #1f1f1f;
+  --surface-2: #2b2b2b;
+  --surface-inverse: #ffffff;
+  --surface-deep: #660033;
+  --ink: #ffffff;
+  --ink-2: #cccccc;
+  --ink-3: #999999;
+  --ink-inverse: #333333;
+  --on-deep: #ffffff;
+  --ink-disabled: #666666;
+  --on-signal: #ffffff;
+  --on-accent: #141414;
+  --line: #ffffff26;
+  --line-strong: #ffffff4d;
+  --line-solid: #808080;
+  --signal: #cc0033;
+  --signal-press: #990033;
+  --signal-text: #ff527d;
+  --signal-tint: #cc00331f;
+  --accent: #ffc72c;
+  --accent-text: #ffc72c;
+  --accent-tint: #ffc72c1f;
+  --ok: #5ad8b8;
+  --ok-tint: #5ad8b81f;
+  --warn: #ffa726;
+  --warn-tint: #ffa7261f;
+  --info: #6cb6e8;
+  --info-tint: #6cb6e81f;
+  --danger: var(--signal-text);
+  --focus: #ffffff;
+  --scrim: #141414cc;
+  --ring-line: 0 0 0 1px #ffffff26;
+  --ring-strong: 0 0 0 1px #ffffff4d;
+  --ring-signal: 0 0 0 1px #cc0033;
+  --lift-signal: 6px 6px 0 0 #cc0033;
+  --lift-ink: 6px 6px 0 0 #ffffff;
+  --theme-color: #141414;
+  color-scheme: dark;
+}
+
+[data-theme="day"] {
+  --surface-0: #ffffff;
+  --surface-1: #f5f5f5;
+  --surface-2: #ebebeb;
+  --surface-inverse: #141414;
+  --surface-deep: #660033;
+  --ink: #333333;
+  --ink-2: #595959;
+  --ink-3: #6a6a6a;
+  --ink-inverse: #ffffff;
+  --on-deep: #ffffff;
+  --ink-disabled: #a3a3a3;
+  --on-signal: #ffffff;
+  --on-accent: #141414;
+  --line: #33333326;
+  --line-strong: #3333334d;
+  --line-solid: #878787;
+  --signal: #cc0033;
+  --signal-press: #990033;
+  --signal-text: #c50031;
+  --signal-tint: #cc00331f;
+  --accent: #ffc72c;
+  --accent-text: #836617;
+  --accent-tint: #ffc72c1f;
+  --ok: #317664;
+  --ok-tint: #5ad8b81f;
+  --warn: #915f16;
+  --warn-tint: #ffa7261f;
+  --info: #426f8e;
+  --info-tint: #6cb6e81f;
+  --danger: var(--signal-text);
+  --focus: #141414;
+  --scrim: #141414cc;
+  --ring-line: 0 0 0 1px #33333326;
+  --ring-strong: 0 0 0 1px #3333334d;
+  --ring-signal: 0 0 0 1px #cc0033;
+  --lift-signal: 6px 6px 0 0 #cc0033;
+  --lift-ink: 6px 6px 0 0 #141414;
+  --theme-color: #ffffff;
+  color-scheme: light;
+}
+
+:root {
+  /* Fonts: --ff-* are injected by the Astro Fonts API (self-hosted woff2 +
+     metric-adjusted fallbacks); these are the names the components use. */
+  --font-display: var(--ff-display, "Big Shoulders Display", Impact, "Arial Narrow", sans-serif);
+  --font-text: var(--ff-text, Barlow, "Helvetica Neue", Arial, sans-serif);
+  --font-mono: var(--ff-mono, "IBM Plex Mono", Menlo, Consolas, monospace);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* Shape and stroke: cut, don't round */
+  --chamfer-1: 6px;
+  --chamfer-2: 10px;
+  --chamfer-3: 16px;
+  --stroke-1: 1px;
+  --stroke-2: 2px;
+  --stroke-3: 3px;
+  --skew-1: -6deg;
+  --radius-0: 0px;
+
+  /* Motion */
+  --ch-dur-1: 100ms;
+  --ch-dur-2: 180ms;
+  --ch-dur-3: 260ms;
+  --ch-dur-4: 420ms;
+  --ch-ease-standard: cubic-bezier(0.65, 0, 0.35, 1);
+  --ch-ease-emphasized: cubic-bezier(0.85, 0, 0.15, 1);
+}
