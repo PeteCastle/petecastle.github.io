@@ -1,0 +1,54 @@
+---
+/** Laid out like Experience: the school on the left, its points on the right.
+    The degrees show up front; the secondary schools sit behind "View more". */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import MoreButton from '../MoreButton.astro';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  education: CollectionEntry<'education'>[];
+  index: number;
+}
+const { education, index } = Astro.props;
+const degrees = education.filter((e) => e.data.level === 'degree');
+const rest = education.filter((e) => e.data.level !== 'degree');
+const points = (e: CollectionEntry<'education'>) =>
+  e.data.points.map((p) => (typeof p === 'string' ? { text: p, gold: false } : p));
+---
+
+<section class="section section--alt" id="education" aria-labelledby="education-title">
+  <div class="shell">
+    <SectionHeading class="reveal" id="education-title" eyebrow={`Education // ${pad2(index)}`} title="Education" />
+    <div class="xp" id="edu-list" data-collapsible>
+      {
+        [...degrees, ...rest].map((e) => (
+          <article class:list={['xp__row', 'reveal', { 'more-extra': e.data.level !== 'degree' }]}>
+            <div class="xp__rec edu__rec">
+              {/* Decorative: the school's name is written right beside it. */}
+              <div class="edu__logo">
+                <Image src={e.data.logo} alt="" width={160} height={160} loading="lazy" decoding="async" />
+              </div>
+              <div class="edu__text">
+                <h3 class="subtitle">{e.data.degree}</h3>
+                <p>{e.data.school}</p>
+                <p class="caption">
+                  {e.data.location} · {e.data.range}
+                </p>
+              </div>
+            </div>
+            <div class="xp__list">
+              <ul>
+                {points(e).map((p) => (
+                  <li class:list={{ 'edu__gold': p.gold }}>{p.text}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    {rest.length > 0 && <MoreButton controls="edu-list" context="education" />}
+  </div>
+</section>

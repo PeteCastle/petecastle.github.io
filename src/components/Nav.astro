@@ -15,7 +15,7 @@ const { current, brand, resume } = Astro.props;
 <header class="site-nav" id="top">
   <div class="shell">
     <nav class="ch-nav" aria-label="Site">
-      <a class="lockup" href="/"><Monogram /><span>{brand}</span></a>
+      <a class="lockup" href="/"><Monogram /><span><span class="visually-hidden">FM </span>{brand}</span></a>
       <ul class="ch-nav__links">
         {
           NAV.map((link) => (

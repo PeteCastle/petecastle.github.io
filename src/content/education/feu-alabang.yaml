@@ -1,6 +1,9 @@
 order: 3
+level: 'secondary'
+degree: 'Senior High School – Science, Technology, Engineering & Mathematics (STEM) with Specialization in Computer Science'
 school: 'Far Eastern University – Alabang'
-degree: 'Senior high school, STEM (Computer Science)'
-year: 2020
-honours: 'With honors (final grade 94.00)'
-gold: false
+location: 'Muntinlupa City, Philippines'
+range: 'Oct 2018 – May 2020'
+logo: './feu-alabang.png'
+points:
+  - 'With Honors (Final Grade: 94.00)'

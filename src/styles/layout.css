@@ -21,6 +21,14 @@
 
 .section { padding-block: 64px; }
 .section--alt { background: var(--surface-1); }
+/* The one surface-deep (maroon) band, Get in touch. Its section carries
+   data-theme="night", so ink and ink-2 stay light in Day too; the crimson eyebrow
+   rule would vanish on maroon, so it turns white, and small grey text moves up to
+   ink-2 (8:1). */
+.section--deep { background: var(--surface-deep); color: var(--on-deep); }
+.section--deep .ch-heading__eyebrow::before { background: var(--on-deep); }
+.section--deep .caption,
+.section--deep .label { color: var(--ink-2); }
 .section > .shell > .ch-heading { margin-bottom: 48px; }
 .g12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 32px; }
 .icon { width: 16px; height: 16px; }
@@ -96,12 +104,15 @@
   color: var(--ink-inverse);
 }
 .hero .ch-heading__eyebrow { color: var(--ink-inverse); }
+.hero__where { gap: 8px; }
+.hero__where::before { content: none; }
+.hero__where svg { width: 18px; height: 18px; flex: none; color: var(--signal); }
 .hero__name { margin-top: 16px; color: var(--ink-inverse); text-wrap: wrap; }
 .hero__role {
   margin-top: 8px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 84px;
+  font-size: 72px;
   line-height: 0.92;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -116,10 +127,9 @@
 .hero .ch-btn--primary { color: var(--on-signal); }
 .hero .ch-btn--primary:hover { --_bg: var(--surface-0); --_edge: var(--surface-0); color: var(--ink); }
 .hero .ch-btn:focus-visible { outline-color: var(--ink-inverse); }
-.strip { margin-top: 96px; }
 @media (max-width: 1279px) {
   .hero__sheet { padding: 48px; }
-  .hero__role { font-size: 64px; }
+  .hero__role { font-size: 56px; }
   .hero__role span { display: block; }
   .hero__role .sep { display: none; }
 }
@@ -127,13 +137,9 @@
   .hero { padding-top: 0; }
   .hero > .shell { padding: 0; }
   .hero__sheet { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+  .hero__role { font-size: 48px; }
   .hero__cta { margin-top: 16px; }
   .hero__cta .ch-btn { width: 100%; height: 44px; font-size: 15px; }
-  .strip {
-    margin-top: 64px;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
-  }
 }
 @media (max-width: 479px) {
   .hero__role { letter-spacing: 0; }
@@ -177,16 +183,6 @@
   .xp__rec, .xp__list { grid-column: 1 / -1; }
 }
 
-/* ---------- The question (surface-deep band) ---------- */
-.why { background: var(--surface-deep); color: var(--on-deep); padding-block: 64px; }
-.why .label { color: var(--on-deep); }
-.why blockquote { margin-top: 16px; max-width: 83.333%; color: var(--on-deep); }
-.why .caption { margin-top: 24px; color: var(--on-deep); }
-@media (max-width: 767px) {
-  .why { padding-block: 48px; }
-  .why blockquote { max-width: 100%; }
-}
-
 /* ---------- About ---------- */
 .about__prose { grid-column: 1 / span 7; display: grid; gap: 24px; min-width: 0; color: var(--ink); }
 .about__figure { grid-column: 10 / span 3; grid-row: 1 / span 2; display: grid; gap: 8px; align-content: start; }
@@ -216,34 +212,59 @@
 .ch-table tbody tr:last-child th.cat { border-bottom: 0; }
 .ch-table tbody tr:hover th.cat { background: var(--surface-2); }
 .ch-table td.tools { color: var(--ink); }
-.ch-table td.ch-num { color: var(--ink-3); font-size: 14px; width: 10%; }
 @media (max-width: 767px) {
   .ch-table thead { display: none; }
-  .ch-table tr { display: grid; grid-template-columns: 1fr auto; }
+  .ch-table tr { display: grid; }
   .ch-table td, .ch-table tbody th.cat { border: 0; padding: 8px 16px; width: auto; }
-  .ch-table tbody th.cat { grid-row: 1; grid-column: 1; padding-top: 16px; }
-  .ch-table td.ch-num { grid-row: 1; grid-column: 2; padding-top: 16px; }
-  .ch-table td.tools { grid-row: 2; grid-column: 1 / -1; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .ch-table tbody th.cat { padding-top: 16px; }
+  .ch-table td.tools { padding-bottom: 16px; border-bottom: 1px solid var(--line); }
   .ch-table tbody tr:last-child td.tools { border-bottom: 0; }
 }
 
-/* ---------- Credentials ---------- */
-.edu { grid-column: 1 / span 5; display: grid; gap: 24px; align-content: start; }
-.edu__item { display: grid; gap: 4px; }
-.edu__item .school { color: var(--ink-2); }
-.edu__item .hon { font-size: 14px; line-height: 22px; color: var(--ink-2); }
-.edu__item .hon--gold { color: var(--accent-text); }
-.certs { grid-column: 7 / span 6; display: grid; }
-.cert { display: grid; grid-template-columns: 112px 1fr; column-gap: 24px; row-gap: 6px; padding: 16px 0; border-top: 1px solid var(--line); }
+/* ---------- View more ----------
+   Extra items show without JavaScript; with it they wait for the button. */
+html.js [data-collapsible]:not(.is-open) > .more-extra { display: none; }
+html:not(.js) .more-btn { display: none; }
+.more-btn { position: relative; border: 0; padding: 0; cursor: pointer; margin-top: 16px; font-size: 14px; line-height: 22px; }
+.more-btn::after { content: ""; position: absolute; inset: -11px -8px; } /* 44px hit area */
+.more-btn svg { transition: transform var(--ch-dur-2) var(--ch-ease-standard); }
+.more-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.xp + .more-btn { margin-top: 24px; }
+
+/* ---------- Education (shares the Experience rows) ---------- */
+.edu__rec { grid-template-columns: 72px minmax(0, 1fr); column-gap: 20px; align-items: start; }
+.edu__logo { width: 72px; height: 72px; }
+.edu__logo img { width: 100%; height: 100%; object-fit: contain; }
+.edu__text { display: grid; gap: 4px; min-width: 0; }
+.edu__text .caption { margin-top: 4px; }
+.xp__list li.edu__gold { color: var(--accent-text); }
+.xp__list li.edu__gold::marker { color: var(--accent-text); }
+@media (max-width: 767px) {
+  .edu__rec { grid-template-columns: 56px minmax(0, 1fr); column-gap: 16px; }
+  .edu__logo { width: 56px; height: 56px; }
+}
+
+/* ---------- Certifications ---------- */
+.certs { display: grid; }
+.cert { display: grid; grid-template-columns: 112px minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); column-gap: 24px; row-gap: 6px; padding: 20px 0; border-top: 1px solid var(--line); align-items: start; }
 .cert:last-child { border-bottom: 1px solid var(--line); }
-.cert__date { font-size: 12px; line-height: 18px; font-weight: 500; letter-spacing: 0.02em; color: var(--ink-3); font-variant-numeric: tabular-nums; grid-row: 1 / span 4; padding-top: 4px; }
+.cert__date { font-size: 12px; line-height: 18px; font-weight: 500; letter-spacing: 0.02em; color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.cert__main { display: grid; gap: 2px; min-width: 0; }
 .cert__name { font-size: 16px; line-height: 24px; font-weight: 600; color: var(--ink); }
 .cert__issuer { font-size: 14px; line-height: 22px; color: var(--ink-2); }
-.cert__links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 4px; }
+.cert__skills { padding-top: 3px; }
+.cert__links { display: flex; gap: 8px 24px; flex-wrap: wrap; justify-content: flex-end; }
+@media (max-width: 1279px) {
+  .cert { grid-template-columns: 112px minmax(0, 1fr); }
+  .cert__date { grid-row: 1 / span 3; }
+  .cert__skills, .cert__links { grid-column: 2; }
+  .cert__skills { padding-top: 0; }
+  .cert__links { justify-content: flex-start; margin-top: 4px; }
+}
 @media (max-width: 767px) {
-  .edu, .certs { grid-column: 1 / -1; }
   .cert { grid-template-columns: 1fr; }
   .cert__date { grid-row: auto; padding-top: 0; }
+  .cert__skills, .cert__links { grid-column: 1; }
 }
 
 /* ---------- Contact ---------- */

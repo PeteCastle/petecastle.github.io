@@ -10,10 +10,10 @@ export async function getProfile() {
   return entry;
 }
 
-/** Jobs, newest first by start date. */
+/** Jobs in their editorial order (the `order` field). */
 export async function getJobs() {
   const jobs = await getCollection('jobs');
-  return jobs.sort((a, b) => b.data.start.getTime() - a.data.start.getTime());
+  return jobs.sort((a, b) => a.data.order - b.data.order);
 }
 
 /** Featured projects in their editorial order. */
@@ -73,32 +73,6 @@ export async function getCatalogue() {
   for (const item of items) byArea[item.entry.data.area] += 1;
 
   return { items, byYear, byArea, total: items.length };
-}
-
-/** Every figure shown on the site, computed from the collections at build time. */
-export async function getCounts() {
-  const [catalogue, jobs, skills, featured] = await Promise.all([getCatalogue(), getJobs(), getSkills(), getFeatured()]);
-  const years = catalogue.items.map((i) => itemDate(i).getUTCFullYear());
-  const current = jobs.filter((j) => j.data.end === null);
-  const growthzacks = jobs.find((j) => j.id === 'growthzacks');
-  const testsMatch = growthzacks?.body?.match(/~([\d,]+) automated tests/);
-  const capstone = catalogue.items.find((i) => i.entry.id === 'milk-sachet-price-optimization');
-  const mapeMatch = capstone?.entry.body?.match(/MAPE to ([\d.]+%) from a ([\d.]+%)/);
-
-  return {
-    projects: catalogue.total,
-    featured: featured.length,
-    firstYear: Math.min(...years),
-    lastYear: Math.max(...years),
-    roles: jobs.length,
-    current: current.length,
-    rolesSince: Math.min(...jobs.map((j) => j.data.start.getUTCFullYear())),
-    tools: skills.reduce((n, s) => n + s.data.tools.length, 0),
-    categories: skills.length,
-    automatedTests: testsMatch ? `~${testsMatch[1]}` : null,
-    capstoneMape: mapeMatch ? { value: mapeMatch[1], baseline: mapeMatch[2] } : null,
-    byArea: catalogue.byArea,
-  };
 }
 
 /** "Experience // 02 · 5 roles" style counters. */

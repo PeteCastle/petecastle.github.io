@@ -1,8 +1,8 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import { pad2 } from '../../lib/data';
-import { words } from '../../lib/words';
 import ExternalLink from '../ExternalLink.astro';
+import MoreButton from '../MoreButton.astro';
 import SectionHeading from '../SectionHeading.astro';
 
 interface Props {
@@ -10,9 +10,21 @@ interface Props {
   index: number;
 }
 const { jobs, index } = Astro.props;
-const rows = await Promise.all(jobs.map(async (job) => ({ job, Content: (await render(job)).Content })));
-const current = jobs.filter((j) => j.data.end === null).length;
-const earlier = jobs.length - current;
+
+/** Roles shown before the section's "View more" (jobs are in their `order`). */
+const ROLES_SHOWN = 3;
+/** Bullets shown before each role's "View more"; entries list their strongest points first. */
+const SHOWN = 2;
+
+// Each entry's body is one Markdown list; split its rendered items so the first
+// SHOWN stay visible. A body that is not a plain list renders whole.
+const rows = await Promise.all(
+  jobs.map(async (job) => {
+    const html = job.rendered?.html ?? '';
+    const bullets = [...html.matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
+    return { job, bullets, Content: bullets.length ? null : (await render(job)).Content };
+  }),
+);
 ---
 
 <section class="section" id="experience" aria-labelledby="experience-title">
@@ -22,12 +34,11 @@ const earlier = jobs.length - current;
       id="experience-title"
       eyebrow={`Experience // ${pad2(index)} · ${jobs.length} roles`}
       title="Experience"
-      lead={`${words(current, true)} roles today, in corporate finance and e-commerce analytics, and the ${words(earlier)} that led there.`}
     />
-    <div class="xp">
+    <div class="xp" id="xp-list" data-collapsible>
       {
-        rows.map(({ job, Content }) => (
-          <article class="xp__row reveal">
+        rows.map(({ job, bullets, Content }, n) => (
+          <article class:list={['xp__row', 'reveal', { 'more-extra': n >= ROLES_SHOWN }]}>
             <div class="xp__rec">
               <h3 class="subtitle">{job.data.title}</h3>
               <p>
@@ -44,11 +55,23 @@ const earlier = jobs.length - current;
               )}
             </div>
             <div class="xp__list">
-              <Content />
+              {Content ? (
+                <Content />
+              ) : (
+                <ul id={`xp-${job.id}`} data-collapsible>
+                  {bullets.map((b, i) => (
+                    <li class:list={[{ 'more-extra': i >= SHOWN }]} set:html={b} />
+                  ))}
+                </ul>
+              )}
+              {bullets.length > SHOWN && (
+                <MoreButton controls={`xp-${job.id}`} context={`${job.data.title}, ${job.data.companyShort}`} />
+              )}
             </div>
           </article>
         ))
       }
     </div>
+    {jobs.length > ROLES_SHOWN && <MoreButton controls="xp-list" context="experience" />}
   </div>
 </section>

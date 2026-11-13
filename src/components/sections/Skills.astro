@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { pad2 } from '../../lib/data';
-import { words } from '../../lib/words';
 import SectionHeading from '../SectionHeading.astro';
 
 interface Props {
@@ -19,13 +18,12 @@ const total = skills.reduce((n, s) => n + s.data.tools.length, 0);
       id="skills-title"
       eyebrow={`Skills // ${pad2(index)} · ${total} tools`}
       title="Tools, by category"
-      lead={`${total} tools in ${words(skills.length)} categories, from languages and analysis to orchestration, cloud and MLOps.`}
     />
     <div class="ch-cut skills-wrap reveal">
       <table class="ch-table">
-        <caption class="visually-hidden">Tools by category, with the number of tools in each</caption>
+        <caption class="visually-hidden">Tools by category</caption>
         <thead>
-          <tr><th scope="col">Category</th><th scope="col">Tools</th><th scope="col" class="ch-num">Count</th></tr>
+          <tr><th scope="col">Category</th><th scope="col">Tools</th></tr>
         </thead>
         <tbody>
           {
@@ -33,7 +31,6 @@ const total = skills.reduce((n, s) => n + s.data.tools.length, 0);
               <tr>
                 <th scope="row" class="cat">{s.data.name}</th>
                 <td class="tools">{s.data.tools.join(' · ')}</td>
-                <td class="ch-num">{s.data.tools.length}</td>
               </tr>
             ))
           }

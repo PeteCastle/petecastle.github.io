@@ -1,8 +1,6 @@
 name: 'Data Engineer Associate'
 issuer: 'DataCamp'
 date: 2023-07-27
-image: './datacamp-data-engineer-associate.jpg'
-imageAlt: 'DataCamp Data Engineer Associate certificate, DEA0016805525402'
 credentialUrl: 'https://www.datacamp.com/certificate/DEA0016805525402'
 skills:
   - 'Data Engineering Fundamentals'

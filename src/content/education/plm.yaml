@@ -1,6 +1,15 @@
 order: 2
+level: 'degree'
+degree: 'Bachelor of Science in Computer Engineering'
 school: 'Pamantasan ng Lungsod ng Maynila'
-degree: 'BS Computer Engineering'
-year: 2024
-honours: 'Summa cum laude · GWA 1.2351'
-gold: true
+location: 'Manila, Philippines'
+range: 'Oct 2020 – Sep 2024'
+logo: './plm.png'
+points:
+  # gold: the page's one accent colour
+  - text: 'Summa Cum Laude (GWA: 1.2351)'
+    gold: true
+  - 'Programming Coursework: Software Engineering; Operating Systems; Data Structures and Algorithms; Computer Architecture and Organization'
+  - 'Electrical Engineering Coursework: Electrical and Electronics Circuits; Logic Circuits'
+  - 'Institute of Computer Engineers of the Philippines – PLM Chapter, Committee on Technological (2022 – 2024): coordinated the technical delivery of events and managed live streaming and camera systems'
+  - 'Class Block Representative (2022 – 2024): liaison between the class and school administration; attended regular meetings on academic and curricular events'

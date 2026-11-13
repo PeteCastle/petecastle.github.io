@@ -1,8 +1,6 @@
 name: 'Data Analyst Professional'
 issuer: 'DataCamp'
 date: 2022-07-07
-image: './datacamp-data-analyst-professional.jpg'
-imageAlt: 'DataCamp Data Analyst Professional certificate, DA0011795037658'
 credentialUrl: 'https://www.datacamp.com/certificate/DA0011795037658'
 skills:
   - 'Analytic Fundamentals'

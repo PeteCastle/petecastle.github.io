@@ -14,21 +14,22 @@ const { profile, index } = Astro.props;
 const p = profile.data;
 ---
 
-<section class="section" id="contact" aria-labelledby="contact-title">
+{/* The page's one maroon band, pinned to Night tokens so its text stays light in both themes. */}
+<section class="section section--deep" id="contact" data-theme="night" aria-labelledby="contact-title">
   <div class="shell">
     <SectionHeading
       class="reveal"
       id="contact-title"
       eyebrow={`Contact // ${pad2(index)}`}
       title="Get in touch"
-      lead="For roles, collaborations and questions about the work, email is fastest."
     />
     <div class="g12">
       <div class="contact__main reveal">
         <a class="ch-link contact__email" href={`mailto:${p.email}`}>{p.email}</a>
         <a class="ch-link ch-link--quiet ch-num" href={`tel:${p.phone}`}>{p.phoneDisplay}</a>
         <div class="contact__cta">
-          <a class="ch-btn ch-btn--primary" href={`mailto:${p.email}`}>Email {p.nickname}</a>
+          {/* White on maroon: a crimson fill would sit at 2.2:1 against the band. */}
+          <a class="ch-btn ch-btn--secondary" href={`mailto:${p.email}`}>Email {p.nickname}</a>
           <a class="ch-btn" href={publicUrl(p.resume)} target="_blank" rel="noopener">
             Download the résumé <Icon name="external" /><span class="visually-hidden"> (PDF, opens in a new tab)</span>
           </a>

@@ -1,6 +1,11 @@
 order: 4
+level: 'secondary'
+degree: 'Junior High School'
 school: 'University of Perpetual Help – Molino Campus'
-degree: 'Junior high school'
-year: 2018
-honours: 'With honors (final grade 94.539) · Antonio Laperal Tamayo Award for Leadership'
-gold: false
+location: 'Bacoor, Cavite, Philippines'
+range: 'Jun 2014 – Apr 2018'
+logo: './uph-molino.png'
+points:
+  - 'With Honors (Final Grade: 94.539)'
+  - 'Sole recipient of the Antonio Laperal Tamayo Award for Leadership in the batch'
+  - 'Citizenship Advancement Training Program – Intelligence Officer (2016): taught students military policies (fitness, academic standards, leadership) and assisted in school events such as class discipline and flag-raising parades'

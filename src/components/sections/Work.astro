@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import { render, type CollectionEntry } from 'astro:content';
 import { pad2 } from '../../lib/data';
-import { words } from '../../lib/words';
 import ExternalLink from '../ExternalLink.astro';
 import Icon from '../Icon.astro';
 import SectionHeading from '../SectionHeading.astro';
@@ -23,7 +22,6 @@ const cards = await Promise.all(featured.map(async (entry) => ({ entry, Content:
       id="work-title"
       eyebrow={`Projects // ${pad2(index)} · ${featured.length} of ${total}`}
       title="Selected work"
-      lead={`${words(featured.length, true)} projects that show the range: probabilistic forecasting, text mining and computer vision.`}
     />
     <div class="cards">
       {

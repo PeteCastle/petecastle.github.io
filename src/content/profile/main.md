@@ -1,12 +1,12 @@
 ---
 name: 'Francis Mark Cayco'
 nickname: 'Kiko'
-brand: 'FM Cayco'
+brand: 'Cayco'
 roles:
   - 'Data Scientist'
   - 'ETL Developer'
 lead: 'Data Scientist at Chevron, freelance ETL Developer at Growthzacks. Builds the pipeline, ships the model, runs the teach-back.'
-location: 'Makati, Philippines'
+location: 'Manila, Philippines'
 email: 'francis_mark_cayco@yahoo.com'
 phone: '+639990368778'
 phoneDisplay: '+63 999 036 8778'
@@ -33,10 +33,6 @@ social:
   - name: 'Instagram'
     handle: 'francismarkk'
     url: 'https://www.instagram.com/francismarkk/?hl=en'
-quote:
-  label: 'The question, 2022'
-  text: 'How can businesses make meaningful decisions from the vast amounts of customer data?'
-  caption: 'From a 2022 TED Talk that started the path into data science; the aim since: data for social and strategic value.'
 seo:
   title: 'Francis Mark Cayco: Data Scientist · ETL Developer'
   description: 'Data Scientist in corporate finance and freelance ETL Developer for e-commerce analytics who scopes, builds, tests and deploys automation, machine-learning and data-pipeline solutions, then drives their adoption through consultancy and teach-back sessions.'

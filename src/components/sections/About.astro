@@ -14,14 +14,13 @@ const { Content } = await render(profile);
 const p = profile.data;
 ---
 
-<section class="section section--alt" id="about" aria-labelledby="about-title">
+<section class="section" id="about" aria-labelledby="about-title">
   <div class="shell">
     <SectionHeading
       class="reveal"
       id="about-title"
       eyebrow={`About // ${pad2(index)}`}
       title={`About ${p.nickname}`}
-      lead={`Full-lifecycle, from scoping to teach-back; based in ${p.location}.`}
     />
     <div class="g12">
       <div class="about__prose rich rich--lg reveal">

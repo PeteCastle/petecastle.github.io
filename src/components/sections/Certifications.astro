@@ -1,0 +1,61 @@
+---
+import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { pad2 } from '../../lib/data';
+import { shortDate } from '../../lib/site';
+import ExternalLink from '../ExternalLink.astro';
+import SectionHeading from '../SectionHeading.astro';
+
+interface Props {
+  certifications: CollectionEntry<'certifications'>[];
+  index: number;
+}
+const { certifications, index } = Astro.props;
+
+// "View the certificate" opens the issuer's own credential page when there is one;
+// otherwise the scan, as a WebP copy (at most 1600px wide), never the original.
+const certs = await Promise.all(
+  certifications.map(async (cert) => {
+    const online = cert.data.credentialUrl;
+    if (online) {
+      return { cert, href: online, icon: true, hint: online.endsWith('.pdf') ? 'PDF, opens in a new tab' : undefined };
+    }
+    // The schema requires a scan whenever there is no credentialUrl.
+    const img = cert.data.image!;
+    const copy = await getImage({ src: img, width: Math.min(1600, img.width), format: 'webp', quality: 82 });
+    return { cert, href: copy.src, icon: false, hint: 'image, opens in a new tab' };
+  }),
+);
+---
+
+<section class="section section--alt" id="certifications" aria-labelledby="certifications-title">
+  <div class="shell">
+    <SectionHeading
+      class="reveal"
+      id="certifications-title"
+      eyebrow={`Certifications // ${pad2(index)} · ${certifications.length}`}
+      title="Certifications"
+    />
+    <div class="certs reveal">
+      {
+        certs.map(({ cert, href, icon, hint }) => (
+          <div class="cert">
+            <p class="cert__date">
+              <time datetime={cert.data.date.toISOString().slice(0, 10)}>{shortDate(cert.data.date)}</time>
+            </p>
+            <div class="cert__main">
+              <h3 class="cert__name">{cert.data.name}</h3>
+              <p class="cert__issuer">{cert.data.issuer}</p>
+            </div>
+            <p class="caption cert__skills">{cert.data.skills.join(' · ')}</p>
+            <p class="cert__links body-sm">
+              <ExternalLink class="ch-link ch-link--quiet" href={href} icon={icon} hint={hint}>
+                View the certificate
+              </ExternalLink>
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

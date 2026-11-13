@@ -1,9 +1,9 @@
 export const SITE_URL = 'https://www.franciscayco.com';
 
 export const NAV = [
-  { label: 'Projects', href: '/projects/', key: 'projects' },
-  { label: 'Experience', href: '/#experience', key: 'experience' },
   { label: 'About', href: '/#about', key: 'about' },
+  { label: 'Experience', href: '/#experience', key: 'experience' },
+  { label: 'Projects', href: '/projects/', key: 'projects' },
   { label: 'Skills', href: '/#skills', key: 'skills' },
   { label: 'Contact', href: '/#contact', key: 'contact' },
 ] as const;

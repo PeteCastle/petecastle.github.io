@@ -1,0 +1,21 @@
+---
+/** "View more" toggle for a list whose extra items carry `.more-extra`.
+    Without JavaScript the button is hidden and every item shows. */
+import Icon from './Icon.astro';
+
+interface Props {
+  /** id of the element marked data-collapsible */
+  controls: string;
+  /** what the list is about, for screen readers ("Data Scientist, Chevron") */
+  context: string;
+}
+const { controls, context } = Astro.props;
+---
+
+<button type="button" class="ch-link more-btn" aria-expanded="false" aria-controls={controls} data-more>
+  <span data-more-label>View more</span><span class="visually-hidden"> ({context})</span><Icon name="chevron-down" />
+</button>
+
+<script>
+  import '../scripts/more';
+</script>

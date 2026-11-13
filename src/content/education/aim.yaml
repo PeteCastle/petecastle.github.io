@@ -1,6 +1,12 @@
 order: 1
+level: 'degree'
+degree: 'Master of Science in Data Science'
 school: 'Asian Institute of Management'
-degree: 'MS Data Science'
-year: 2025
-honours: 'GPA 4.25 · Aboitiz Scholarship Grantee'
-gold: false
+location: 'Makati City, Philippines'
+range: 'Jun 2024 – Dec 2025'
+logo: './aim.png'
+points:
+  - 'GPA: 4.25'
+  - 'Aboitiz Scholarship Grantee'
+  - 'Data Science Coursework: Network Science; Deep Learning; Neural Networks; Explainable AI; Predictive Analytics; Geospatial Analysis; Machine Learning Operations; Data Engineering; Prompt Engineering'
+  - 'Coursework: Data Visualization; Data Mining and Wrangling; Supervised and Unsupervised Machine Learning'
