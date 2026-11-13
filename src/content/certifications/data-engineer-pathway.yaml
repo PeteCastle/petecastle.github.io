@@ -2,7 +2,6 @@ name: 'Data Engineer Pathway Completer'
 issuer: 'Development Academy of the Philippines (Project SPARTA)'
 date: 2023-11-29
 image: './data-engineer-pathway.jpg'
-imageAlt: 'Certificate of completion for the Data Engineer pathway of Project SPARTA, Development Academy of the Philippines'
 skills:
   - 'Public Policy and Governance'
   - 'Computing Microspecialization'

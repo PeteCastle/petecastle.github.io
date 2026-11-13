@@ -24,12 +24,12 @@ tools, per-area and per-year counts) is computed from it at build time.
 | What | Where |
 |---|---|
 | Name, lead sentence, contact, social links, bio, SEO | `src/content/profile/main.md` |
-| Jobs (one file each, bullets in the body) | `src/content/jobs/*.md` |
+| Jobs (one file each, bullets in the body, listed by `order`; the first three roles, and each role's first two bullets, show before "View more") | `src/content/jobs/*.md` |
 | Featured projects (cover image beside each) | `src/content/featured/*/index.md` |
 | All other projects | `src/content/projects/*.md` |
 | Tools by category | `src/content/skills.yaml` |
-| Certifications (scan beside each) | `src/content/certifications/*.yaml` |
-| Education | `src/content/education/*.yaml` |
+| Certifications ("View the certificate" opens `credentialUrl`; give a scan beside the yaml as `image` only when there is no online copy) | `src/content/certifications/*.yaml` |
+| Education (one yaml per school with its logo beside it; `level: secondary` entries sit behind "View more") | `src/content/education/*.yaml` |
 
 Each project needs an `area` (`ml`, `de`, `software`, `analytics`, `cv` or `nlp`); it drives the
 filter on `/projects/`. The schemas live in `src/content.config.ts`, and `npm run build` fails on

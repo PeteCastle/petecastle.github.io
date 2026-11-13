@@ -30,7 +30,6 @@ const profile = defineCollection({
     languages: z.array(z.string()),
     interests: z.array(z.string()),
     social: z.array(z.object({ name: z.string(), handle: z.string(), url: z.url() })),
-    quote: z.object({ label: z.string(), text: z.string(), caption: z.string() }),
     seo: z.object({
       title: z.string(),
       description: z.string(),
@@ -45,6 +44,7 @@ const profile = defineCollection({
 const jobs = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/jobs' }),
   schema: z.object({
+    order: z.number().int(),
     title: z.string(),
     company: z.string(),
     companyShort: z.string(),
@@ -102,27 +102,37 @@ const skills = defineCollection({
 const certifications = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/certifications' }),
   schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      issuer: z.string(),
-      date: z.coerce.date(),
-      image: image(),
-      imageAlt: z.string(),
-      credentialUrl: z.url().optional(),
-      skills: z.array(z.string()).min(1),
-    }),
+    z
+      .object({
+        name: z.string(),
+        issuer: z.string(),
+        date: z.coerce.date(),
+        /** The issuer's own copy; "View the certificate" opens it. */
+        credentialUrl: z.url().optional(),
+        /** A scan beside the yaml file, for certificates with no online copy. Leave it
+            out when credentialUrl is set: an unlinked scan still ships at full size. */
+        image: image().optional(),
+        skills: z.array(z.string()).min(1),
+      })
+      .refine((c) => c.credentialUrl || c.image, { message: 'Give either credentialUrl or image.' }),
 });
 
 const education = defineCollection({
   loader: glob({ pattern: '*.yaml', base: './src/content/education' }),
-  schema: z.object({
-    order: z.number().int(),
-    school: z.string(),
-    degree: z.string(),
-    year: z.number().int(),
-    honours: z.string(),
-    gold: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      order: z.number().int(),
+      /** Degrees show up front; secondary schools sit behind "View more". */
+      level: z.enum(['degree', 'secondary']),
+      degree: z.string(),
+      school: z.string(),
+      location: z.string(),
+      range: z.string(),
+      /** The school's mark, a square transparent PNG beside the yaml file. */
+      logo: image(),
+      /** Bullet points; `{ text, gold: true }` sets one in the accent gold. */
+      points: z.array(z.union([z.string(), z.object({ text: z.string(), gold: z.literal(true) })])).min(1),
+    }),
 });
 
 export const collections = { profile, jobs, featured, projects, skills, certifications, education };

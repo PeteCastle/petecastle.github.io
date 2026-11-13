@@ -1,4 +1,5 @@
 ---
+order: 1
 title: 'Data Scientist'
 company: 'Chevron Holdings Inc.'
 companyShort: 'Chevron'

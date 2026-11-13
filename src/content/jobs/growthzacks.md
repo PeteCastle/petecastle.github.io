@@ -1,4 +1,5 @@
 ---
+order: 2
 title: 'ETL Developer (Freelance)'
 company: 'Growthzacks LLC'
 companyShort: 'Growthzacks'

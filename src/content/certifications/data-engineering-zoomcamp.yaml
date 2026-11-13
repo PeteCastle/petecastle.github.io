@@ -1,8 +1,6 @@
 name: 'Data Engineering Zoomcamp'
 issuer: 'DataTalks.Club'
 date: 2023-05-15
-image: './data-engineering-zoomcamp.jpg'
-imageAlt: 'DataTalks.Club Data Engineering Zoomcamp 2023 certificate'
 credentialUrl: 'https://certificate.datatalks.club/dezoomcamp/2023/6ebba68872f2c7756d723394229b8ac07f3d49f7.pdf'
 skills:
   - 'Prefect'
